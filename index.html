@@ -1,5 +1,121 @@
 <html>
+<head>
+	<link href="style/web.css" rel="stylesheet" />
+	<script src="script/cash.min.js"></script>
+	<script src="script/squirrelly.min.js"></script>
+	<script src="metadata1.js"></script>
+	<script src="metadata2.js"></script>
+	<script src="company1.js"></script>
+	<script src="company2.js"></script>
+	<script src="script/web.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+</head>
 <body>
-Hello
+	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none;">
+		<defs>
+			<g id="icon-all">
+				<path class="fil1" d="M1491 778l7556 0 144 0 0 144 0 7820 0 144 -144 0 -7556 0 -145 0 0 -144 0 -7820 0 -144 145 0zm7412 288l-7268 0 0 7532 7268 0 0 -7532z" />
+				<path class="fil1" d="M1405 1868c159,12 278,151 265,310 -12,158 -151,277 -310,264 -249,-19 -471,-115 -633,-258 -177,-156 -285,-368 -285,-603 0,-252 123,-476 322,-634 180,-143 425,-232 691,-232 267,0 512,89 692,232 198,158 322,382 322,634 0,159 -130,288 -289,288 -159,0 -288,-129 -288,-288 0,-67 -40,-132 -103,-183 -82,-65 -200,-106 -334,-106 -133,0 -251,41 -333,106 -64,51 -103,116 -103,183 0,61 34,122 89,171 72,63 176,106 297,116z" />
+				<path class="fil1" d="M1405 3967c159,12 278,151 265,310 -12,158 -151,277 -310,264 -249,-20 -471,-116 -633,-258 -177,-156 -285,-368 -285,-603 0,-252 123,-476 322,-634 180,-143 425,-232 691,-232 267,0 512,89 692,232 198,158 322,382 322,634 0,159 -130,288 -289,288 -159,0 -288,-129 -288,-288 0,-67 -40,-133 -103,-183 -82,-65 -200,-106 -334,-106 -133,0 -251,41 -333,106 -64,50 -103,116 -103,183 0,61 34,122 89,171 72,63 176,106 297,116z" />
+				<path class="fil1" d="M1405 6066c159,12 278,151 265,310 -12,158 -151,277 -310,264 -249,-20 -471,-116 -633,-258 -177,-156 -285,-368 -285,-603 0,-252 123,-476 322,-634 180,-143 425,-232 691,-232 267,0 512,89 692,232 198,158 322,382 322,634 0,159 -130,288 -289,288 -159,0 -288,-129 -288,-288 0,-67 -40,-133 -103,-183 -82,-65 -200,-106 -334,-106 -133,0 -251,41 -333,106 -64,50 -103,116 -103,183 0,61 34,122 89,171 72,63 176,106 297,116z" />
+				<path class="fil1" d="M1405 8165c159,12 278,151 265,310 -12,158 -151,277 -310,264 -249,-20 -471,-116 -633,-258 -177,-156 -285,-369 -285,-603 0,-252 123,-476 322,-634 180,-143 425,-232 691,-232 267,0 512,89 692,232 198,158 322,382 322,634 0,159 -130,288 -289,288 -159,0 -288,-129 -288,-288 0,-67 -40,-133 -103,-183 -82,-66 -200,-106 -334,-106 -133,0 -251,40 -333,106 -64,50 -103,116 -103,183 0,61 34,122 89,170 72,64 176,107 297,117z" />
+				<path class="fil2" d="M4766 5816l0 2178 -1425 0 0 -6323 2232 0c1594,0 2390,671 2390,2015 0,635 -229,1149 -686,1542 -458,391 -1067,588 -1832,588l-679 0zm0 -3053l0 1972 560 0c759,0 1138,-332 1138,-996 0,-650 -379,-976 -1138,-976l-560 0z" />
+				<polygon class="fil1" points="9047,1437 9736,1437 9880,1437 9880,1581 9880,9401 9880,9545 9736,9545 2180,9545 2036,9545 2036,9401 2036,8742 2324,8742 2324,9257 9592,9257 9592,1725 9047,1725 " />
+			</g>
+			<g id="icon-tag">
+				<path class="fil1" d="M16818 7375l-263 1219 -3008 0 -727 3455 3239 0 -310 1223 -3169 0 -1014 4572 -1451 0 991 -4572 -2882 0 -967 4572 -1438 0 967 -4572 -3016 0 228 -1223 3055 0 700 -3455 -3189 0 240 -1219 3192 0 967 -4631 1451 0 -967 4631 2901 0 991 -4631 1419 0 -967 4631 3027 0zm-4698 1219l-2905 0 -759 3455 2925 0 739 -3455z" />
+			</g>
+			<g id="icon-company">
+				<path class="fil1" d="M10547 2532c2211,0 4215,899 5666,2349l1 -1c1451,1451 2348,3454 2348,5667 0,2213 -897,4217 -2348,5667l-1 -1c-1451,1451 -3455,2349 -5666,2349 -2213,0 -4216,-897 -5667,-2348 -1450,-1450 -2348,-3454 -2348,-5667 0,-2213 898,-4216 2348,-5667 1451,-1450 3454,-2348 5667,-2348zm4888 3126c-1249,-1249 -2977,-2022 -4888,-2022 -1908,0 -3636,773 -4887,2024 -1251,1251 -2024,2979 -2024,4887 0,1909 773,3637 2024,4888 1251,1250 2979,2024 4887,2024 1911,0 3639,-773 4888,-2022l0 -2c1250,-1251 2024,-2979 2024,-4888 0,-1908 -774,-3636 -2024,-4887l0 -2z" />
+				<path class="fil1" d="M7924 6150c549,0 1048,224 1410,585l2 2c361,362 585,861 585,1410 0,550 -224,1049 -586,1411l1 2c-361,361 -860,585 -1412,585 -549,0 -1048,-224 -1410,-585l-2 0c-362,-361 -585,-861 -585,-1413 0,-549 224,-1048 585,-1410l2 -2c362,-361 861,-585 1410,-585zm635 1365l-3 -2c-161,-160 -385,-260 -632,-260 -247,0 -471,100 -632,260l-3 2c-160,162 -259,385 -259,632 0,247 100,472 262,633l-2 1c162,161 387,261 634,261 247,0 471,-100 632,-262l3 0c160,-160 259,-384 259,-633 0,-247 -99,-470 -259,-632z" />
+				<path class="fil1" d="M13186 6150c549,0 1048,224 1410,585l2 2c360,362 585,861 585,1410 0,550 -225,1049 -587,1411l2 2c-362,361 -861,585 -1412,585 -551,0 -1051,-224 -1412,-585l0 -3c-361,-361 -585,-860 -585,-1410 0,-548 223,-1047 585,-1409l1 -1 1 -2c362,-361 861,-585 1410,-585zm634 1365l-2 -2c-162,-160 -385,-260 -632,-260 -248,0 -472,100 -632,260l-3 2c-160,160 -259,384 -259,632 0,248 100,472 260,634l1 -1c162,162 386,262 633,262 246,0 470,-100 632,-262l2 0c160,-160 260,-384 260,-633 0,-247 -100,-470 -260,-632z" />
+				<path class="fil1" d="M15204 11760c0,1284 -522,2448 -1364,3290l-2 3 -9 8c-842,837 -2002,1355 -3282,1355 -1285,0 -2450,-521 -3292,-1364l-30 -32c-825,-841 -1334,-1993 -1334,-3260l1103 0c0,970 386,1848 1013,2487l28 26c643,642 1531,1040 2512,1040 982,0 1872,-397 2514,-1039 642,-643 1040,-1532 1040,-2514l1103 0z" />
+			</g>
+			<g id="icon-sort-az">
+				<path class="fil0" d="M4491 3239l-375 0 -258 -734 -1145 0 -258 734 -356 0 962 -2643 469 0 961 2643zm-2462 522l0 -3241 -366 0 0 3241 -598 0 781 891 781 -891 -598 0zm4385 829l-2061 0 0 -327 1622 -2003 -1560 0 0 -313 1959 0 0 316 -1641 2014 1681 0 0 313zm-2667 -2390l-461 -1295 -464 1295 925 0z" />
+			</g>
+			<g id="icon-sort-date">
+				<path class="fil0" d="M1736 551l0 -352 0 -107 107 0 355 0 107 0 0 107 0 352 929 0 0 -352 0 -107 107 0 354 0 108 0 0 107 0 352 851 0 107 0 0 107 0 352 0 107 0 107 0 2350 0 108 -107 0 -3817 0 -107 0 0 -108 0 -2350 0 -107 0 -107 0 -352 0 -107 107 0 899 0zm1978 1546l609 0 0 588 -609 0 0 -588zm0 -626l609 0 0 588 -609 0 0 -588zm-651 1253l609 0 0 588 -609 0 0 -588zm0 -627l609 0 0 588 -609 0 0 -588zm0 -626l609 0 0 588 -609 0 0 -588zm-651 1253l609 0 0 588 -609 0 0 -588zm0 -627l609 0 0 588 -609 0 0 -588zm0 -626l609 0 0 588 -609 0 0 -588zm-651 1253l609 0 0 588 -609 0 0 -588zm0 -627l609 0 0 588 -609 0 0 -588zm-651 627l609 0 0 588 -609 0 0 -588zm0 -627l609 0 0 588 -609 0 0 -588zm841 -1546l139 0 0 -245 -139 0 0 245zm1497 0l140 0 0 -245 -140 0 0 245zm1098 673l-743 0 -108 0 -354 0 -107 0 -929 0 -107 0 -355 0 -107 0 -792 0 0 2243 3602 0 0 -2243z" />
+			</g>
+		</defs>
+	</svg>
+
+	<main class="open">
+		<header>
+			<div id="cmd-menu-toggle" class="hamburger">  
+				<div class="bar1"></div>
+				<div class="bar2"></div>
+				<div class="bar3"></div>
+			</div>
+			<div id="title">Title</div>
+			<div id="cmd-page-prev">&lt;</div>
+			<div id="cmd-page-next">&gt;</div>
+		</header>
+		<div class="layout">
+			<nav>
+				<div class="tabs">
+					<div class="tab" id="tab-all" data-tab="all">
+						<!--<svg viewBox="0 0 11034 11034"><use xlink:href="#icon-all"></use></svg>-->
+						<span>Vše</span>
+					</div>
+					<div class="tab" id="tab-tag" data-tab="tag">
+						<!--<svg viewBox="0 0 20588 20588"><use xlink:href="#icon-tag"></use></svg>-->
+						<span>Tag</span>
+					</div>
+					<div class="tab" id="tab-company" data-tab="company">
+						<!--<svg viewBox="0 0 21095 21095"><use xlink:href="#icon-company"></use></svg>-->
+						<span>Interview</span>
+					</div>
+				</div>
+				<div class="sorts">
+					<div class="sort" data-sort="az">
+							A-Z
+							<!--<svg viewBox="0 0 7143 5010"><use xlink:href="#icon-sort-az"></use></svg>-->
+					</div>
+					<div class="sort" data-sort="date">
+							Date
+							<!--<svg viewBox="0 0 5434 3811"><use xlink:href="#icon-sort-date"></use></svg>-->
+					</div>
+				</div>
+				<div class="content-header">
+
+				</div>
+
+				<div id="tab-content">
+
+				</div>
+			</nav>
+			<div class="content">
+				<div class="overlay">
+					<article>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet elit convallis, dictum dolor quis, convallis ligula. Aenean sit amet dolor turpis. Proin accumsan sed ante nec elementum. Mauris id est ultricies, euismod nisi in, tempus massa. Nullam pellentesque, purus in gravida condimentum, sem odio congue ipsum, sed venenatis magna metus ac mi. Sed dapibus magna sit amet purus porta hendrerit. Nullam tincidunt massa eget venenatis ornare. Praesent aliquet est ut metus laoreet, a aliquet massa vehicula. Nullam hendrerit ex a semper placerat. Fusce ipsum nulla, tincidunt non placerat quis, finibus vel lorem. Donec lacinia vestibulum massa, vitae porttitor risus accumsan vel. Nullam eu odio ac urna malesuada sodales.
+
+						Praesent magna nisi, dictum ut laoreet eu, dignissim in lorem. Sed in lectus cursus, pharetra orci in, convallis magna. Fusce quis tempus mi, vel volutpat elit. Etiam eu ex fermentum, molestie quam vitae, gravida diam. Nam ac tincidunt lorem. Aenean ac feugiat felis, nec pharetra leo. Aenean at tristique enim. Pellentesque ut eros ultrices, suscipit urna interdum, condimentum mauris. Morbi diam diam, pulvinar vitae velit eu, vestibulum porttitor lorem. Pellentesque at sem non nisi mollis auctor.
+
+						Aenean eleifend enim eget ante bibendum fringilla. Sed fringilla magna sed orci fringilla finibus. Aenean blandit lectus turpis, nec cursus quam feugiat ac. Cras tempor lacus molestie rutrum lobortis. Integer magna odio, euismod non erat eget, rutrum facilisis erat. Praesent sem leo, ullamcorper sed augue placerat, mattis pellentesque velit. Nulla aliquam mi ac nulla maximus tempus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec scelerisque dui.
+
+						Duis a placerat mauris. Aliquam varius ultricies faucibus. Nam gravida varius nisi, non elementum ante sodales at. Etiam ac ex ultricies, faucibus tortor eu, pulvinar dolor. Duis quis volutpat erat, sed faucibus elit. Nullam arcu est, sagittis at lacinia at, fermentum id leo. Donec suscipit augue sed auctor aliquam. Suspendisse et pulvinar purus. Nunc ultrices odio sit amet leo congue, vitae auctor nulla tincidunt. Quisque vitae vulputate diam, vel faucibus leo. Integer quis tempus leo. Ut sed sollicitudin mauris. Ut maximus vel metus sed dapibus. Sed ac diam elementum, pulvinar metus pellentesque, sagittis metus.
+
+						Donec varius purus sed lectus pellentesque, eget euismod nibh venenatis. Sed in aliquam leo. Curabitur elementum iaculis orci, et pellentesque quam. Praesent scelerisque nulla velit, quis ultrices arcu porta a. Nullam condimentum maximus convallis. Ut ut odio sed elit tempus scelerisque. Nunc in fermentum ex. Vivamus porttitor lorem nec varius egestas. Cras interdum nisl at quam dictum, in faucibus leo consequat.
+
+						Morbi orci lacus, faucibus eget neque ac, vulputate cursus diam. Praesent vel augue eros. Cras mattis posuere ligula sed mollis. Sed viverra libero vulputate dolor aliquam, eu aliquet turpis tincidunt. Nulla id tempus augue. In pellentesque in arcu vitae efficitur. Vestibulum iaculis suscipit rutrum. Sed pulvinar ante a metus pulvinar, non molestie erat dignissim. Donec elementum ligula eu iaculis sodales. Etiam at erat eros.
+
+						Curabitur blandit eleifend orci et ultrices. Phasellus id neque elit. Duis auctor pretium lacinia. Ut quis ornare massa. Curabitur euismod turpis eros, imperdiet consequat dolor facilisis eget. Curabitur luctus ultricies lectus, id mollis enim maximus in. Mauris venenatis est non ante ultrices, non aliquam lectus gravida. Pellentesque vitae eros et sapien venenatis iaculis a non sem. Integer accumsan sed purus sed pellentesque. Suspendisse ac facilisis dui. Aliquam est odio, lacinia eu posuere eget, blandit et risus. Nunc quam felis, imperdiet at feugiat ac, placerat nec odio. Nullam et eleifend ipsum.
+
+						Mauris consectetur tellus vel dignissim varius. Aliquam justo tellus, commodo vel justo eu, sagittis iaculis urna. Mauris lobortis, neque vitae mattis pharetra, eros libero tincidunt dolor, id mollis lacus nibh non tortor. Donec vitae magna iaculis, maximus orci convallis, imperdiet diam. Nullam quis tincidunt nisi. Pellentesque ut tempor turpis. Etiam molestie, ante a porta elementum, enim neque molestie risus, et posuere tellus ligula sed sapien. Morbi vitae laoreet felis. Donec sed posuere ante. Maecenas ex turpis, egestas in sapien aliquam, maximus aliquet nulla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+
+						Nunc blandit erat nisi. Vestibulum fringilla eu dui vel varius. Etiam mattis lobortis diam fringilla egestas. Mauris sed diam accumsan, porttitor nibh a, consequat tellus. Maecenas urna elit, suscipit a semper quis, bibendum vel nibh. Cras viverra mi in dui bibendum, a commodo dolor faucibus. Maecenas interdum, eros id faucibus porttitor, diam erat eleifend dui, pellentesque tristique ligula augue eget ex. Maecenas tempor enim a egestas cursus. Aenean suscipit lorem tortor, nec gravida augue mollis at. Sed ut aliquet libero. Curabitur non arcu porta, porta lorem in, dignissim est. Integer at felis vel justo dictum convallis. Donec sit amet egestas orci, id commodo purus. Ut at felis nec dui rutrum maximus consectetur sed risus.
+
+						Donec efficitur libero ligula, et interdum odio ornare sed. In pellentesque ligula sit amet nisl commodo bibendum. Nullam aliquam tortor vitae lacus tempus pharetra. Nam dolor nisl, blandit a magna at, pretium euismod augue. Maecenas quis enim ut risus elementum volutpat. Nullam urna ex, interdum vel sollicitudin vitae, faucibus non erat. Sed ullamcorper tristique nulla, vitae vestibulum elit vulputate eget.
+
+					</article>
+				</div>
+			</div>
+		</div>
+	</main>
+
+
+
 </body>
 </html>
