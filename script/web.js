@@ -1,4 +1,9 @@
 $(function () {
+    //var myTemplate = "<p>My favorite kind of cake is: {{favoriteCake}}</p>";
+    //var a = Sqrl.Render(myTemplate, { favoriteCake: 'Chocolate!' });
+    //alert(a);
+    //return;
+
     var db = [];
 
     if (typeof window.db1 !== "undefined") {
@@ -86,7 +91,7 @@ $(function () {
 
     var updateArticle = function() {
         var hash = window.location.hash;
-        if (hash != null && hash.substr(0, 1) === "#") {
+        if (typeof hash === "string" && hash.substr(0, 1) === "#") {
             var item = find(hash.substr(1));
 
             if (item === null) {
@@ -94,9 +99,9 @@ $(function () {
                 return;
             }
 
-            $("#title").text(item.Title);
+            $("#title span").text(item.Title);
 
-            if (item.Html != null) {
+            if (item.Html !== null) {
                 setArticleContent(item.Html);
             } else {
                 var url = item.Url || "/" + item.Id + ".html";
@@ -112,20 +117,46 @@ $(function () {
     $(window).on('hashchange', updateArticle);
     updateArticle();
 
-    var itemList = function (db) {
+    var printItemList = function (items) {
+
+        //return Sqrl.Render("Hello" +
+        //    "{{each(options.d)}}" +
+        //    "{{if(@this.Year)}}<h2>{{@this.Year}}</h2>{{/if}}" +
+        //    "<ul>" +
+        //    "{{each(@this.Items)}}<li>{{@this.Title}}</li>{{/each}}" +
+        //    "</ul>" +
+        //    "{{/each}}" +
+        //    ""
+        //    , { d: items });
+
+        //return Sqrl.Render("{{if(1)}}x{{/if}}", {});
+        //return Sqrl.Render(
+        //    "{{each(options.items)}}" +
+        //    "{{@this.Year}}" +
+        //    "{{if(1)}}x{{/if}}" +
+        //    "{{/each}}", {items: items});
+
         var html = [];
 
-        for (var i = 0; i < db.length; i++) {
+        for (var i = 0; i < items.length; i++) {
             html.push("<div class='list'>");
-            if (db[i].Year != null) {
-                html.push("<div>" + db[i].Year + "</div>");
+            if (items[i].Year !== null && items[i].Year !== "null") {
+                html.push("<h2>" + items[i].Year + "</h2>");
             }
 
-            for (var j = 0; j < db[i].Items.length; j++) {
-                var item = db[i].Items[j];
+            html.push("<ul>");
 
-                html.push("<a href='#" + item.Id + "' class='item'>" + safe(item.Title) + "</a>");
+            for (var j = 0; j < items[i].Items.length; j++) {
+                var item = items[i].Items[j];
+                html.push("<li>");
+                html.push("<a href='#" + item.Id + "' class='item'>");
+                html.push("<h3>" + safe(item.Title) + "</h3>");
+                html.push("<span>" + safe(item.SubTitle) + "</span>");
+                html.push("</a>");
+                html.push("</li>");
             }
+
+            html.push("</ul>");
 
             html.push("</div>");
         }
@@ -133,10 +164,19 @@ $(function () {
         return html.join('');
     };
 
-    var sortItems = function (items, selectedSort) {
-        var i;
-        var bags = {};
-        if (selectedSort === "date") {
+    var printTagList = function(tags) {
+        var html = [];
+
+        for (var i = 0; i < tags.length; i++) {
+            html.push("<span class='tag tag-" + tags[i].Size + "' data-tag='" + safe(tags[i].Name) + "'>" + safe(tags[i].Name) + "</span> ");
+        }
+
+        return html.join('');
+    };
+
+    var sortItems = function (items, sort) {
+        var i, bags = {};
+        if (sort === "date") {
             for (i = 0; i < items.length; i++) {
                 if (typeof items[i].Year !== "undefined") {
                     if (typeof bags[items[i].Year] === "undefined") {
@@ -172,16 +212,64 @@ $(function () {
         return result;
     };
 
-    var getAllItems = function () {
-        return db;
-    };
+    var getTagItems = function (items, tag) {
 
-    var getTagItems = function() {
+        var result = [];
 
+        for (var i = 0; i < items.length; i++) {
+            for (var j = 0; j < items[i].Tags.length; j++) {
+                if (items[i].Tags[j] === tag) {
+                    result.push(items[i]);
+                    break;
+                }
+            }
+        }
+
+        return result;
     };
 
     var getAllTags = function() {
-        
+        var tags = {};
+        var i,k;
+
+        for (i = 0; i < db.length; i++) {
+            if (!!db[i].Tags) {
+                for (var j = 0; j < db[i].Tags.length; j++) {
+                    var tag = db[i].Tags[j];
+                    if (typeof tags[tag] === "undefined") {
+                        tags[tag] = { Name: tag, Size: 1, Count: 0 };
+                    }
+                    tags[tag].Count++;
+                }
+            }
+        }
+
+        var result = [];
+        for (k in tags) {
+            if (tags.hasOwnProperty(k)) {
+                result.push(tags[k]);
+            }
+        }
+
+        result.sort(function(a, b) {
+            if (a.Count < b.Count) return -1;
+            if (a.Count > b.Count) return 1;
+            return 0;
+        });
+
+        var count = 5;
+
+        for (i = 0; i < result.length; i++) {
+            result[i].Size = (1 + i * count / result.length) | 0;
+        }
+
+        result.sort(function(a, b) {
+            if (a.Name < b.Name) return -1;
+            if (a.Name > b.Name) return 1;
+            return 0;
+        });
+
+        return result;
     };
 
     var selectedTab = "all";
@@ -192,9 +280,11 @@ $(function () {
         var html = "";
         if (selectedTab === "all") {
 
-            var items = db;
-
-            html = itemList(result);
+            html = printItemList(sortItems(db, selectedSort));
+        } else if (selectedTab === "tag" && selectedTag === null) {
+            html = printTagList(getAllTags());
+        } else if (selectedTab === "tag" && selectedTag !== null) {
+            html = printItemList(sortItems(getTagItems(db, selectedTag), selectedSort));
         }
 
         setMenuContent(html);
@@ -210,12 +300,24 @@ $(function () {
     $(".tab").on("click",
         function() {
             selectedTab = $(this).data("tab");
+            if (selectedTab === "tag") {
+                selectedTag = null;
+            }
+
             updateMenu();
         });
 
     $(".sort").on("click",
         function() {
             selectedSort = $(this).data("sort");
+            updateMenu();
+        });
+
+    $("#tab-content").on("click",
+        ".tag",
+        function() {
+            //alert($(this).text());
+            selectedTag = $(this).data("tag");
             updateMenu();
         });
 });

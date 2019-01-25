@@ -26,6 +26,13 @@ nav, div.content {
 
 #title {
 	flex: 1;
+	min-width: 0;
+}
+
+#title span {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 body.full nav {
@@ -82,9 +89,9 @@ body.toggle main.open nav {
 .bar1, .bar2, .bar3 {
 	width: 35px;
 	height: 5px;
-	background-color: #333;
+	background-color: black;
 	margin: 6px 0;
-	transition: 0.4s;
+	transition: 0.1s;
 }
 
 main.open .bar1 {
@@ -148,3 +155,71 @@ header {
 div.list a {
 	display: block;
 }
+
+/* Menu  */
+
+div.list a {
+	text-decoration: none;
+	color: black;
+	display: block;
+	padding: 4pt;
+}
+
+div.list a:hover {
+	color: white;
+	background-color: #008DD2;
+}
+
+div.list ul {
+	list-style-type: none;
+}
+
+div.list ul, div.list h3 {
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+}
+
+div.list h3 {
+	font-size: 120%;
+}
+
+div.list span {
+	font-size: 80%;
+	font-style: italic;
+}
+
+/* Tag */
+
+.tag {
+	cursor: pointer;
+	padding: 2pt;
+	margin-right: 2pt;
+}
+
+.tag:hover {
+	color: white;
+	background-color: #008DD2;
+	text-decoration: underline;
+}
+
+.tag-1 {
+	font-size: 70%;
+}
+
+.tag-2 {
+	font-size: 80%;
+}
+
+.tag-3 {
+	font-size: 90%;
+}
+
+.tag-4 {
+	font-size: 110%;
+}
+
+.tag-5 {
+	font-size: 150%;
+}
+
