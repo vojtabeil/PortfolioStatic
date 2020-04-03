@@ -1,13 +1,25 @@
 ﻿(function (win) {
     var e = React.createElement;
-    window.pf = {};
 
     function TodoItem(props) {
         return e("li", null, props.text);
     }
 
+    var Card = function(props) {
+        return e("div", { className : "card" }, [
+            e("div", { key: "background", className: "card-background", style: { backgroundImage: "url('" + props.item.image + "')" } }),
+            e("div", { key: "description", className: "card-description" }, [
+                e("h3", { key: "title" }, props.item.title),
+                e("p", { key: "subtitle" }, props.item.subtitle)
+                ])
+            ]);
+    };
+
     var AppLayout = function(props) {
-        return e("div", null, "Test");
+        return e("div", null, [
+            e(Card, {key: "card", item: win.pf.items[0]}),
+            e("div", {key: "cardstssty"}, "Tewt")
+            ]);
     };
 
     var TodoApp = createReactClass({
