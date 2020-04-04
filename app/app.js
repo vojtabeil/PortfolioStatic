@@ -1,4 +1,4 @@
-﻿(function (win) {
+﻿(function (pf) {
     var e = React.createElement;
 
     function TodoItem(props) {
@@ -17,7 +17,7 @@
 
     var AppLayout = function(props) {
         return e("div", null, [
-            e(Card, {key: "card", item: win.pf.items[0]}),
+            e(Card, {key: "card", item: pf.items[0]}),
             e("div", {key: "cardstssty"}, "Tewt")
             ]);
     };
@@ -70,7 +70,7 @@
         }
     });
 
-    window.pf.run = function(element) {
+    pf.run = function(element) {
         ReactDOM.render(e(AppLayout), element);
     };
-})(window);
+})(window.pf);

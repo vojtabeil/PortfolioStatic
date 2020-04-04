@@ -6,7 +6,8 @@
         tags: ["heavy metal", "metal", "hard rock", "rock"],
         year: 1975,
         subtitle: "New wave of British heavy metal",
-        image: '/test/iron_maiden_image01.jpg'
+        image: '/test/iron_maiden_image01.jpg',
+        private: false
     },
     {
         title: "Kamelot",
@@ -15,7 +16,8 @@
         tags: ["power metal", "symphonic metal", "melodic metal", "metal"],
         year: 1991,
         subtitle: "",
-        image: '/test/kamelot_image01.jpg'
+        image: '/test/kamelot_image01.jpg',
+        private: false
     },
     {
         title: "Nightwish",
@@ -24,7 +26,8 @@
         tags: ["power metal", "symphonic metal", "gothic metal", "metal"],
         year: 1996,
         subtitle: "",
-        image: '/test/nightwish_image01.jpg'
+        image: '/test/nightwish_image01.jpg',
+        private: false
     },
     {
         title: "Amorphis",
@@ -33,7 +36,8 @@
         tags: ["progressive metal", "melodic death metal", "death metal", "metal"],
         year: 1990,
         subtitle: "",
-        image: '/test/amorphis_image01.jpg'
+        image: '/test/amorphis_image01.jpg',
+        private: false
     },
     {
         title: "Helloween",
@@ -42,7 +46,18 @@
         tags: ["power metal", "heavy metal", "speed metal", "metal"],
         year: 1990,
         subtitle: "",
-        image: '/test/helloween_image01.jpg'
+        image: '/test/helloween_image01.jpg',
+        private: false
+    },
+    {
+        title: "Petra Janů",
+        id: "petra_janu",
+        url: "/test/petra_janu.html",
+        tags: ["progressive rock", "czech", "czech pop", "rock"],
+        year: 1990,
+        subtitle: "",
+        image: '/test/petra_janu_image01.jpg',
+        private: true
     }
 ];
 
