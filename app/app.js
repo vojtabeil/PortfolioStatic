@@ -4,6 +4,16 @@
     function TodoItem(props) {
         return e("li", null, props.text);
     }
+    
+    var CardCollection = function(props) {
+      return e("div", { className: "card-collection"});
+    }
+    
+    var CardGroup = function(props) {
+      return e("div", {}, [
+        e("h2", {key: "header"}, props.group)
+        ]);
+    }
 
     var Card = function(props) {
         return e("div", { className : "card" }, [
