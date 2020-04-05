@@ -4,17 +4,7 @@
     function TodoItem(props) {
         return e("li", null, props.text);
     }
-    
-    var CardCollection = function(props) {
-      return e("div", { className: "card-collection"});
-    }
-    
-    var CardGroup = function(props) {
-      return e("div", {}, [
-        e("h2", {key: "header"}, props.group)
-        ]);
-    }
-
+ 
     var Card = function(props) {
         return e("div", { className : "card" }, [
             e("div", { key: "background", className: "card-background", style: { backgroundImage: "url('" + props.item.image + "')" } }),
@@ -24,6 +14,19 @@
                 ])
             ]);
     };
+
+    var CardCollection = function(props) {
+        return e("div", { className: "card-collection"},
+            props.items.map(function(n) { return e() } )
+        );
+    };
+      
+    var CardGroup = function(props) {
+        return e("div", {}, [
+            e("h2", {key: "header"}, props.group),
+            e(CardCollection, {key: "collection", items: props.items})
+        ]);
+    }
 
     var AppLayout = function(props) {
         return e("div", null, [
