@@ -10,9 +10,20 @@ body {
 }
 
 .card {
-  background-color: #ddd;
+  background-color: #fff;
+  margin: 1em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.card h3, .card p {
+  padding: 0;
+  margin: 0;
+}
+
+
 
 .card-background {
   height: 3em;
+  background-position: center;
+  background-size: cover;
 }
