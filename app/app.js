@@ -6,13 +6,15 @@
     }
  
     var Card = function(props) {
-        return e("div", { className : "card" }, [
-            e("div", { key: "background", className: "card-background", style: { backgroundImage: "url('" + props.item.image + "')" } }),
-            e("div", { key: "description", className: "card-description" }, [
-                e("h3", { key: "title" }, props.item.title),
-                e("p", { key: "subtitle" }, props.item.subtitle)
+        return e("div", {className: "card-container"},
+            e("div", { className : "card" }, [
+                e("div", { key: "background", className: "card-background", style: { backgroundImage: "url('" + props.item.image + "')" } }),
+                e("div", { key: "description", className: "card-description" }, [
+                    e("h3", { key: "title" }, props.item.title),
+                    e("p", { key: "subtitle" }, props.item.subtitle)
+                    ])
                 ])
-            ]);
+        );
     };
 
     var CardCollection = function(props) {
@@ -90,7 +92,19 @@
                 e("span", {key: "label"}, "výběr")
             ]));
 
+            var showSort = false;
+
             if (this.state.tab == "all" || this.state.tab == "selection") {
+                showSort = true;
+            } else if (this.state.tab == "tags") {
+                if (this.state.tag !== null) {
+                    array.push(e("li", {key: "separator", className: "separator" }));
+                    array.push(e("li", {key: "tag", className: "tag", onClick: this.clearTag }, this.state.tag));
+                    showSort = true;
+                }
+            }
+
+            if (showSort) {
                 array.push(e("li", {key: "separator", className: "separator" }));
 
                 array.push(e("li", {key: "abc", className: this.state.sort == "abc" ? "active" : "", onClick: this.setSortAbc }, [
@@ -99,11 +113,6 @@
                 array.push(e("li", {key: "date", className: this.state.sort == "date" ? "active" : "", onClick: this.setSortDate }, [
                     e("img", {key: "icon", src: "app/sort-date.svg"})
                 ]));
-            } else if (this.state.tab == "tags") {
-                if (this.state.tag !== null) {
-                    array.push(e("li", {key: "separator", className: "separator" }));
-                    array.push(e("li", {key: "tag", className: "tag" }, this.state.tag));
-                }
             }
 
             return e("ul", {key: "mode-selection", className: "mode-selection"}, array);
@@ -112,7 +121,7 @@
             this.setState({tab: "all", clickCount: 0});
         },
         setTabTags: function() {
-            this.setState({tab: "tags", clickCount: 0});
+            this.setState({tab: "tags", tag: null, clickCount: 0});
         },
         setTabSelection: function() {
             var newState = {tab: "selection", clickCount: this.state.clickCount + 1}; 
@@ -132,8 +141,12 @@
         setTag: function(tag) {
             this.setState({tag: tag});
         },
+        clearTag: function() {
+            this.setState({tag: null});
+        },
         clickTag: function(target) {
-            alert("tag");
+            var tag = target.target.dataset.tag;
+            this.setTag(tag);
         },
         filter: function(items, callback) {
             var result = [];
@@ -204,15 +217,15 @@
 
             if (this.state.tag === null) {
                 var tags = this.getAllTags(list);
-                return e("ul", {className: "tag-list"}, tags.map(function(t) { return e("li", { key: t.name, className: "size" + t.size, onClick: this.clickTag }, t.name ); }));
+                var clickTag = this.clickTag;
+                return e("ul", {className: "tag-list"}, tags.map(function(t) { return e("li", { key: t.name, className: "size" + t.size, onClick: clickTag, "data-tag": t.name }, t.name ); }));
             } else {
 
+                var tag = this.state.tag;
                 list = this.filter(list, function(item) {
-                    for(var i = 0; i < pf.selection.items.length; i++) {
-                        for(var j = 0; j < item.tags.length; j++) {
-                            if (pf.selection.items[i] == item.tags[j]) {
-                                return true;
-                            }
+                    for(var i = 0; i < item.tags.length; i++) {
+                        if (item.tags[i] == tag) {
+                            return true;
                         }
                     }
                     return false;
@@ -271,8 +284,6 @@
             return e("div", {key: "list"}, groupList.map(function(g) {
                 return e(CardGroup, {key: g.group, group: g.group, items: g.items});
             }));
-
-            //return e(CardGroup, {group: 'test', items: items});
         },
         renderDebugMenu: function() {
             return e("div", {key: "debug-menu"}, "DEBUG");

@@ -54,10 +54,38 @@ ul.mode-selection li.separator {
   border-left: 2px dashed #A9ABAE;
 }
 
+.card-collection {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-container {
+  width: 100%;
+}
+
+@media screen and (min-width: 400px) {
+  .card-container {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .card-container {
+    width: 33%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .card-container {
+    width: 25%;
+  }
+}
+
 .card {
   background-color: #fff;
-  margin: 1em;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+  margin: 8pt;
 }
 
 .card h3, .card p {
@@ -70,3 +98,28 @@ ul.mode-selection li.separator {
   background-position: center;
   background-size: cover;
 }
+
+ul.tag-list {
+  margin: 0;
+  padding: 0;
+  display: block;
+  text-align: center;
+}
+
+ul.tag-list li {
+  cursor: pointer;
+  display: inline;
+  padding: 2pt;
+  margin: 0pt 4pt;
+}
+
+ul.tag-list li:hover {
+  color: white;
+  background-color: #008DD2;
+}
+
+ul.tag-list li.size1 { font-size: 8pt; }
+ul.tag-list li.size2 { font-size: 10pt; }
+ul.tag-list li.size3 { font-size: 12pt; }
+ul.tag-list li.size4 { font-size: 16pt; }
+ul.tag-list li.size5 { font-size: 24pt; }
