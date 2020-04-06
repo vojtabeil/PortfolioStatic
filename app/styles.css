@@ -63,29 +63,28 @@ ul.mode-selection li.separator {
   width: 100%;
 }
 
-@media screen and (min-width: 400px) {
-  .card-container {
-    width: 50%;
-  }
-}
-
-@media screen and (min-width: 750px) {
-  .card-container {
-    width: 33%;
-  }
-}
-
-@media screen and (min-width: 1000px) {
-  .card-container {
-    width: 25%;
-  }
-}
+@media screen and (min-width: 400px) { .card-container { width: 50%; } }
+@media screen and (min-width: 750px) { .card-container { width: 33%; } }
+@media screen and (min-width: 1000px) { .card-container { width: 25%; } }
+@media screen and (min-width: 1200px) { .card-container { width: 20%; } }
+@media screen and (min-width: 1600px) { .card-container { width: 16%; } }
 
 .card {
   background-color: #fff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
   margin: 8pt;
+  opacity: 1.0;
+  transition: background-color 0.3s, opacity 0.3s, color 0.1s;
+}
+
+.card:hover {
+  color: white;
+  background-color: #008DD2;
+}
+
+.card:hover .card-background {
+  opacity: 0.5;
 }
 
 .card h3, .card p {
@@ -93,8 +92,17 @@ ul.mode-selection li.separator {
   margin: 0;
 }
 
+.card h3 {
+  font-weight: bold;
+}
+
+.card p {
+  font-style: italic;
+  font-size: 10pt;
+}
+
 .card-background {
-  height: 3em;
+  height: 64pt;
   background-position: center;
   background-size: cover;
 }

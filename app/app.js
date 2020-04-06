@@ -55,7 +55,7 @@
 
     var Menu = createReactClass({
         getInitialState: function() {
-            return { tab: "all", sort: "abc", tag: null, displayPrivate: false, clickCount: 0, debugMenu: false };
+            return { tab: "all", sort: "date", tag: null, displayPrivate: false, clickCount: 0, debugMenu: false };
         },
         render: function() {
             var array = [];
@@ -232,7 +232,6 @@
                 });
     
                 return this.renderList(list);
-    
             }
         },
         renderTabSelection: function() {
@@ -255,10 +254,12 @@
 
             for(var i = 0; i < items.length; i++) {
                 var item = items[i];
-                var group = item.title.substring(0, 1);
+                var group = item.title.substring(0, 1).toUpperCase();
                 if (this.state.sort == "date") {
                     if ((item.year || 0) > 0) {
                         group = item.year;
+                    } else {
+                        group = "#";
                     }
                 }
 
@@ -271,12 +272,14 @@
 
             for(var g in groups) {
                 if (groups.hasOwnProperty(g)) {
+                    var group = groups[g];
+                    group.sort(function(a, b) { return a.title.localeCompare(b.title); });
                     groupList.push({group: g, items: groups[g]});
                 }
             }
 
             if (this.state.sort == "date") {
-                groupList.sort(function(a, b) { return a.group - b.group; });
+                groupList.sort(function(a, b) { return b.group - a.group; });
             } else {
                 groupList.sort(function(a, b) { return a.group.localeCompare(b.group); });
             }
@@ -285,8 +288,14 @@
                 return e(CardGroup, {key: g.group, group: g.group, items: g.items});
             }));
         },
+        displayPrivateChange : function(event) {
+            this.setState({displayPrivate: !!event.target.value});
+        },
         renderDebugMenu: function() {
-            return e("div", {key: "debug-menu"}, "DEBUG");
+            return e("div", {key: "debug-menu", className: "debug-menu"}, [
+                e("input", {key: "display-private", type: "checkbox", onChange: this.displayPrivateChange}),
+                e("label", {key: "display-private-label"}, "zobrazit skryté")
+            ]);
         }
     });
 
