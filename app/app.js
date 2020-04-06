@@ -93,10 +93,10 @@
             if (this.state.tab == "all" || this.state.tab == "selection") {
                 array.push(e("li", {key: "separator", className: "separator" }));
 
-                array.push(e("li", {key: "abc", className: this.state.sort == "abc" ? "active" : "" }, [
+                array.push(e("li", {key: "abc", className: this.state.sort == "abc" ? "active" : "", onClick: this.setSortAbc }, [
                     e("img", {key: "icon", src: "app/sort-abc.svg"})
                 ]));
-                array.push(e("li", {key: "date", className: this.state.sort == "date" ? "active" : "" }, [
+                array.push(e("li", {key: "date", className: this.state.sort == "date" ? "active" : "", onClick: this.setSortDate }, [
                     e("img", {key: "icon", src: "app/sort-date.svg"})
                 ]));
             } else if (this.state.tab == "tags") {

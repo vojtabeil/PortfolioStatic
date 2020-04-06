@@ -9,14 +9,49 @@ body {
   height: 100%;
 }
 
-menu {
-  color: black;
-  background-color: #ECECEC;
-}
-
 header {
   background-color: #008DD2;
   color: white;
+}
+
+menu {
+  color: black;
+  background-color: #ECECEC;
+  padding: 0;
+  margin: 0;
+}
+
+ul.mode-selection {
+  padding: 0;
+  margin: 1em 0;
+}
+
+ul.mode-selection li {
+  color: white;
+  display: inline;
+  background-color: #A9ABAE;
+  padding: 0.5em;
+  cursor: pointer;
+  margin-left: 0.5em;
+  font-size: 16pt;
+}
+
+ul.mode-selection li img {
+  height: 1em;
+}
+
+ul.mode-selection li span {
+  padding: 0 0.5em;
+}
+
+ul.mode-selection li.active {
+  background-color: #008DD2;
+}
+
+ul.mode-selection li.separator {
+  padding: 0.5em 0;
+  background-color: transparent;
+  border-left: 2px dashed #A9ABAE;
 }
 
 .card {
