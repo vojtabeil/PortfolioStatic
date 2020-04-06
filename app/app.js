@@ -4,7 +4,7 @@
     pf.hash = '-';
     pf.appRef = React.createRef();
 
-    var navigate = function() {
+    var navigateCallback = function() {
         var hash = window.location.hash;
         if (hash == pf.hash) {
             return;
@@ -32,7 +32,12 @@
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
 
-        pf.appRef.current.setLoading(true);
+        if (item.content) {
+            pf.appRef.current.setContent(item, item.content);
+            return;
+        }
+
+        pf.appRef.current.setLoadingItem(item);
 
         xhttp.onerror = function() {
             pf.appRef.current.setLoading(false);
@@ -44,7 +49,8 @@
                 if (item.url.indexOf("ext") !== -1) {
                     content = content.split(item.id + "-image").join("ext/" + item.id + "-image");
                 }
-                pf.appRef.current.setContent(content);
+                pf.appRef.current.setContent(item, content);
+                item.content = content;
             }
         };
 
@@ -52,12 +58,16 @@
         xhttp.send();
     };
     
-    window.setInterval(navigate, 200);
-    window.addEventListener("hashchange", navigate);
+    window.setInterval(navigateCallback, 200);
+    window.addEventListener("hashchange", navigateCallback);
+
+    var navigate = function(id) {
+        window.location.hash = "#!" + id;
+    }
 
     var navigateClick = function(event) {
         var id = event.currentTarget.dataset.id;
-        window.location.hash = "#!" + id;
+        navigate(id);
     };
  
     var Card = function(props) {
@@ -91,9 +101,10 @@
                 tab: "all", sort: "date", tag: null, 
                 displayPrivate: false, clickCount: 0, showDebugMenu: false,
                 showMenu: true,
-                selectedItem: pf.items[0], 
+                selectedItem: null, 
                 loading: false, html: ""};
         },
+        itemList: [],
         render: function() {
             var menu = [];
 
@@ -114,16 +125,16 @@
             return e("div", null, [
                 e("div", {key: "overlay", className: "overlay"}, [
                     e("header", {key: "header"}, [
-                        e("div", { key: "toggle-menu", className: "menu-toggle" }, "[toggle]"),
-                        e("h1", {key: "title"}, this.state.selectedItem.title),
-                        e("div", {key: "nav", className: "nav"}, [
-                            e("span", {key: "prev"}, "<"),
-                            e("span", {key: "next"}, ">")
+                        e("img", { key: "toggle-menu", className: this.state.showMenu ? "menu-toggle open" : "menu-toggle closed", onClick: this.toggleMenu, src: "app/head-hamburger.svg" }),
+                        e("h1", {key: "title"}, this.state.selectedItem ? this.state.selectedItem.title : "#")
+                        ,e("nav", {key: "nav" }, [
+                            e("span", {key: "prev", onClick: this.navigatePrev}, "<"),
+                            e("span", {key: "next", onClick: this.navigateNext}, ">")
                         ])
                     ]),
-                    e("menu", {key: "menu", className: this.state.showMenu ? "visible" : "hidden"}, menu)
+                    e("menu", {key: "menu", className: this.state.showMenu ? "visible" : "hidden"}, this.state.showMenu ? menu : [])
                 ]),
-                e("main", {dangerouslySetInnerHTML: { __html: this.state.html}, className: this.state.loading ? "loading" : ""})
+                e("main", {key: "main", dangerouslySetInnerHTML: { __html: this.state.showMenu ? "" : this.state.html}, className: this.state.loading ? "loading" : ""})
             ]);
         },
         renderSelection: function() {
@@ -148,14 +159,14 @@
                 showSort = true;
             } else if (this.state.tab == "tags") {
                 if (this.state.tag !== null) {
-                    array.push(e("li", {key: "separator", className: "separator" }));
+                    array.push(e("li", {key: "separator1", className: "separator" }));
                     array.push(e("li", {key: "tag", className: "tag", onClick: this.clearTag }, this.state.tag));
                     showSort = true;
                 }
             }
 
             if (showSort) {
-                array.push(e("li", {key: "separator", className: "separator" }));
+                array.push(e("li", {key: "separator2", className: "separator" }));
 
                 array.push(e("li", {key: "abc", className: this.state.sort == "abc" ? "active" : "", onClick: this.setSortAbc }, [
                     e("img", {key: "icon", src: "app/sort-abc.svg"})
@@ -166,6 +177,9 @@
             }
 
             return e("ul", {key: "mode-selection", className: "mode-selection"}, array);
+        },
+        toggleMenu: function() {
+            this.setState({showMenu: !this.state.showMenu});
         },
         setTabAll: function() {
             this.setState({tab: "all", clickCount: 0});
@@ -201,8 +215,31 @@
         setLoading: function(value) {
             this.setState({loading: value});
         },
-        setContent: function(html) {
-            this.setState({html: html, showMenu: false});
+        setLoadingItem: function(item) {
+            this.setState({loading: true, selectedItem: item});
+        },
+        setContent: function(item, html) {
+            this.setState({html: html, showMenu: false, loading: false, selectedItem: item});
+        },
+        navigateIndex: function(id) {
+            for(var i = 0; i < this.itemList.length; i++) {
+                if (this.itemList[i].id === id) {
+                    return i;
+                }
+            }
+            return -1;
+        },
+        navigatePrev: function() {
+            var index = this.navigateIndex(this.state.selectedItem.id);
+            if (index > 0) {
+                navigate(this.itemList[index - 1].id);
+            }
+        },
+        navigateNext: function() {
+            var index = this.navigateIndex(this.state.selectedItem.id);
+            if (index >= 0 && index + 1 < this.itemList) {
+                navigate(this.itemList[index + 1].id);
+            }
         },
         filter: function(items, callback) {
             var result = [];
@@ -266,7 +303,7 @@
         },
         renderTabAll: function() {
             var list = this.getBaseList();
-            return this.renderList(list);
+            return this.setList(list);
         },
         renderTabTags: function() {
             var list = this.getBaseList();
@@ -274,7 +311,11 @@
             if (this.state.tag === null) {
                 var tags = this.getAllTags(list);
                 var clickTag = this.clickTag;
-                return e("ul", {className: "tag-list"}, tags.map(function(t) { return e("li", { key: t.name, className: "size" + t.size, onClick: clickTag, "data-tag": t.name }, t.name ); }));
+                return e("ul", {className: "tag-list"}, tags.map(function(t) { 
+                    return e("li", { key: t.name, className: "size" + t.size }, [
+                        e("span", { key: "tag", onClick: clickTag, "data-tag": t.name}, t.name),
+                        e("wbr", {key: "wbr"})
+                    ] ); }));
             } else {
 
                 var tag = this.state.tag;
@@ -287,7 +328,7 @@
                     return false;
                 });
     
-                return this.renderList(list);
+                return this.setList(list);
             }
         },
         renderTabSelection: function() {
@@ -302,9 +343,9 @@
                 return false;
             });
 
-            return this.renderList(list);
+            return this.setList(list);
         },
-        renderList: function(items) {
+        setList: function(items) {
             var groups = {};
             var groupList = [];
 
@@ -338,6 +379,13 @@
                 groupList.sort(function(a, b) { return b.group - a.group; });
             } else {
                 groupList.sort(function(a, b) { return a.group.localeCompare(b.group); });
+            }
+
+            this.itemList = [];
+            for(var i = 0; i < groupList.length; i++) {
+                for(var j = 0; j < groupList[i].items.length; j++) {
+                    this.itemList.push(groupList[i].items[j]);
+                }
             }
 
             return e("div", {key: "list"}, groupList.map(function(g) {
