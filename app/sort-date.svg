@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Creator: CorelDRAW X7 -->
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="53px" height="37px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 1830 1283"
+<!-- Creator: CorelDRAW 2018 (64-Bit Evaluation Version) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="0.522402in" height="0.363185in" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 154.84 107.65"
  xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
   <style type="text/css">
    <![CDATA[
-    .fil2 {fill:none}
-    .fil0 {fill:#373435}
-    .fil1 {fill:#373435;fill-rule:nonzero}
+    .fil0 {fill:#FEFEFE}
+    .fil1 {fill:#FEFEFE;fill-rule:nonzero}
    ]]>
   </style>
  </defs>
  <g id="Layer_x0020_1">
   <metadata id="CorelCorpID_0Corel-Layer"/>
-  <polygon class="fil0" points="280,1003 280,173 186,173 186,1003 33,1003 233,1231 433,1003 "/>
-  <path class="fil1" d="M753 191l0 -119 0 -36 36 0 120 0 36 0 0 36 0 119 313 0 0 -119 0 -36 36 0 119 0 36 0 0 36 0 119 287 0 36 0 0 36 0 118 0 37 0 36 0 791 0 36 -36 0 -1286 0 -36 0 0 -36 0 -791 0 -36 0 -37 0 -118 0 -36 36 0 303 0zm666 521l206 0 0 198 -206 0 0 -198zm0 -211l206 0 0 198 -206 0 0 -198zm-219 422l205 0 0 198 -205 0 0 -198zm0 -211l205 0 0 198 -205 0 0 -198zm0 -211l205 0 0 198 -205 0 0 -198zm-219 422l205 0 0 198 -205 0 0 -198zm0 -211l205 0 0 198 -205 0 0 -198zm0 -211l205 0 0 198 -205 0 0 -198zm-219 422l205 0 0 198 -205 0 0 -198zm0 -211l205 0 0 198 -205 0 0 -198zm-220 211l205 0 0 198 -205 0 0 -198zm0 -211l205 0 0 198 -205 0 0 -198zm284 -521l47 0 0 -82 -47 0 0 82zm504 0l47 0 0 -82 -47 0 0 82zm370 227l-251 0 -36 0 -119 0 -36 0 -313 0 -36 0 -120 0 -36 0 -266 0 0 755 1213 0 0 -755z"/>
-  <rect class="fil2" width="1830" height="1283"/>
+  <polygon class="fil0" points="21.99,86.1 21.99,12.2 13.62,12.2 13.62,86.1 -0,86.1 17.81,106.4 35.62,86.1 "/>
+  <path class="fil1" d="M64.11 13.8l0 -10.6 0 -3.21 3.21 0 10.68 0 3.2 0 0 3.21 0 10.6 27.87 0 0 -10.6 0 -3.21 3.21 0 10.6 0 3.21 0 0 3.21 0 10.6 25.55 0 3.21 0 0 3.21 0 10.51 0 3.29 0 3.21 0 70.43 0 3.21 -3.21 0 -114.5 0 -3.21 0 0 -3.21 0 -70.43 0 -3.21 0 -3.29 0 -10.51 0 -3.21 3.21 0 26.98 0 -0 0zm59.3 46.39l18.34 0 0 17.63 -18.34 0 0 -17.63zm0 -18.79l18.34 0 0 17.63 -18.34 0 0 -17.63zm-19.5 37.57l18.25 0 0 17.63 -18.25 0 0 -17.63zm0 -18.79l18.25 0 0 17.63 -18.25 0 0 -17.63zm0 -18.79l18.25 0 0 17.63 -18.25 0 0 -17.63zm-19.5 37.57l18.25 0 0 17.63 -18.25 0 0 -17.63zm0 -18.79l18.25 0 0 17.63 -18.25 0 0 -17.63zm0 -18.79l18.25 0 0 17.63 -18.25 0 0 -17.63zm-19.5 37.57l18.25 0 0 17.63 -18.25 0 0 -17.63zm0 -18.79l18.25 0 0 17.63 -18.25 0 0 -17.63zm-19.59 18.79l18.25 0 0 17.63 -18.25 0 0 -17.63zm0 -18.79l18.25 0 0 17.63 -18.25 0 0 -17.63zm25.29 -46.39l4.18 0 0 -7.3 -4.18 0 0 7.3zm44.87 0l4.18 0 0 -7.3 -4.18 0 0 7.3zm32.94 20.21l-22.35 0 -3.21 0 -10.6 0 -3.21 0 -27.87 0 -3.2 0 -10.68 0 -3.21 0 -23.68 0 0 67.22 108 0 0 -67.22z"/>
  </g>
 </svg>

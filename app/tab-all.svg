@@ -1,34 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Creator: CorelDRAW X7 -->
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="80px" height="80px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 5535 5535"  xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- Creator: CorelDRAW 2018 (64-Bit Evaluation Version) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="0.214661in" height="0.293406in" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 6.05 8.27"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
-  <font id="FontID0" horiz-adv-x="703" font-variant="normal" style="fill-rule:nonzero" font-style="normal" font-weight="700">
-	<font-face 
-		font-family="Segoe UI">
-	</font-face>
-   <missing-glyph><path d="M0 0z"/></missing-glyph>
-   <glyph unicode="P" horiz-adv-x="614"><path d="M237.84 241.172l0 -241.172 -157.836 0 0 700.174 247.166 0c176.488,0 264.659,-74.3363 264.659,-223.172 0,-70.3343 -25.3341,-127.178 -76.0023,-170.675 -50.6682,-43.3342 -118.159,-65.1552 -202.836,-65.1552l-75.1512 0zm0 337.999l0 -218.337 61.9862 0c84.0064,0 126.001,36.8331 126.001,110.336 0,72.0003 -41.9941,108 -126.001,108l-61.9862 0z"/></glyph>
-  </font>
   <style type="text/css">
    <![CDATA[
-    @font-face { font-family:"Segoe UI";src:url("#FontID0") format(svg)}
-    .str0 {stroke:#373435;stroke-width:144.703}
-    .str1 {stroke:#373435;stroke-width:289.323;stroke-linecap:round}
+    .str0 {stroke:#FEFEFE;stroke-width:0.39;stroke-miterlimit:2.61313}
+    .str1 {stroke:#FEFEFE;stroke-width:0.39;stroke-linecap:round;stroke-miterlimit:2.61313}
     .fil0 {fill:none}
-    /*.fil1 {fill:#373435}*/
-    .fnt0 {font-weight:bold;font-size:4529.91px;font-family:'Segoe UI'}
    ]]>
   </style>
  </defs>
  <g id="Layer_x0020_1">
-  <rect class="fil0" width="5535" height="5535"/>
-  <rect class="fil0 str0" x="748" y="463" width="3790" height="3922"/>
-  <path class="fil0 str1" d="M694 1081c-186,-15 -328,-139 -328,-288 0,-160 163,-290 364,-290 201,0 363,130 363,290"/>
-  <path class="fil0 str1" d="M694 2134c-186,-15 -328,-140 -328,-288 0,-160 163,-290 364,-290 201,0 363,130 363,290"/>
-  <path class="fil0 str1" d="M694 3187c-186,-15 -328,-140 -328,-289 0,-159 163,-289 364,-289 201,0 363,130 363,289"/>
-  <path class="fil0 str1" d="M694 4239c-186,-14 -328,-139 -328,-288 0,-160 163,-289 364,-289 201,0 363,129 363,289"/>
-  <text x="1313" y="4010"  class="fil1 fnt0">P</text>
-  <polyline class="fil0 str0" points="4538,793 4884,793 4884,4715 1093,4715 1093,4385 "/>
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <rect class="fil0 str0" x="0.2" y="0.2" width="5.66" height="7.88" rx="0.87" ry="0.87"/>
+  <line class="fil0 str1" x1="2.61" y1="2.99" x2="5.03" y2= "2.99" />
+  <line class="fil0 str1" x1="2.61" y1="4.15" x2="5.03" y2= "4.15" />
+  <line class="fil0 str1" x1="2.61" y1="5.32" x2="5.03" y2= "5.32" />
+  <line class="fil0 str1" x1="2.61" y1="6.48" x2="5.03" y2= "6.48" />
+  <line class="fil0 str1" x1="1.09" y1="1.42" x2="2.81" y2= "1.42" />
+  <line class="fil0 str1" x1="1.61" y1="2.99" x2="1.24" y2= "2.99" />
+  <line class="fil0 str1" x1="1.61" y1="4.15" x2="1.24" y2= "4.15" />
+  <line class="fil0 str1" x1="1.61" y1="5.32" x2="1.24" y2= "5.32" />
+  <line class="fil0 str1" x1="1.61" y1="6.48" x2="1.24" y2= "6.48" />
  </g>
 </svg>

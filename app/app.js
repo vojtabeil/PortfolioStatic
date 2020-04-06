@@ -17,7 +17,7 @@
 
     var CardCollection = function(props) {
         return e("div", { className: "card-collection"},
-            props.items.map(function(n) { return e() } )
+            props.items.map(function(n) { return e(Card, { key: n.id, item: n }) } )
         );
     };
       
@@ -28,60 +28,264 @@
         ]);
     }
 
-    var AppLayout = function(props) {
+    var MenuToggle = function(props) {
+        return e("div", { className: "menu-toggle" }, "[toggle]");
+    }
+
+    var Title = function(props) {
+        return e("h1", null, props.text)
+    }
+
+    var MenuNavigation = function(props) {
         return e("div", null, [
-            e(Card, {key: "card", item: pf.items[0]}),
-            e("div", {key: "cardstssty"}, "Tewt")
-            ]);
+            e("span", {key: "prev"}, "<"),
+            e("span", {key: "next"}, ">")
+        ]);
+    }
+
+    var Header = function(props) {
+        return e("header", null, [
+            e(MenuToggle, {key: "menu-toggle"}),
+            e(Title, {key: "title", text: "Index"}),
+            e(MenuNavigation, {key: "menu-navigation"})
+        ]);
     };
 
-    var TodoApp = createReactClass({
-        getInitialState: function () {
-            return { items: [], text: "" };
+    var Menu = createReactClass({
+        getInitialState: function() {
+            return { tab: "all", sort: "abc", tag: null, displayPrivate: false, clickCount: 0, debugMenu: false };
         },
+        render: function() {
+            var array = [];
 
-        handleEditInput: function (evt) {
-            this.setState({ text: evt.target.value });
+            array.push(this.renderSelection());
+
+            if (this.state.debugMenu) {
+                array.push(this.renderDebugMenu());
+            }
+
+            if (this.state.tab == "all") {
+                array.push(this.renderTabAll());
+            } else if (this.state.tab == "tags") {
+                array.push(this.renderTabTags());
+            } else if (this.state.tab == "selection") {
+                array.push(this.renderTabSelection());
+            }
+
+            return e("menu", null, array);
         },
+        renderSelection: function() {
+            var array = [];
 
-        handleSubmit: function (evt) {
-            evt.preventDefault();
-            if (!this.state.text.length) return;
-            this.setState(function (prevState) {
-                return {
-                    items: prevState.items.concat({
-                        id: Math.random() + "",
-                        text: prevState.text
-                    }),
-                    text: ""
-                };
+            array.push(e("li", {key: "all", className: this.state.tab == "all" ? "active" : "", onClick: this.setTabAll }, [
+                e("img", {key: "icon", src: "app/tab-all.svg"}),
+                e("span", {key: "label"}, "seznam")
+            ]));
+            array.push(e("li", {key: "tags", className: this.state.tab == "tags" ? "active" : "", onClick: this.setTabTags }, [
+                e("img", {key: "icon", src: "app/tab-tags.svg"}),
+                e("span", {key: "label"}, "tagy")
+            ]));
+            array.push(e("li", {key: "selection", className: this.state.tab == "selection" ? "active" : "", onClick: this.setTabSelection }, [
+                e("img", {key: "icon", src: "app/tab-selection.svg"}),
+                e("span", {key: "label"}, "výběr")
+            ]));
+
+            if (this.state.tab == "all" || this.state.tab == "selection") {
+                array.push(e("li", {key: "separator", className: "separator" }));
+
+                array.push(e("li", {key: "abc", className: this.state.sort == "abc" ? "active" : "" }, [
+                    e("img", {key: "icon", src: "app/sort-abc.svg"})
+                ]));
+                array.push(e("li", {key: "date", className: this.state.sort == "date" ? "active" : "" }, [
+                    e("img", {key: "icon", src: "app/sort-date.svg"})
+                ]));
+            } else if (this.state.tab == "tags") {
+                if (this.state.tag !== null) {
+                    array.push(e("li", {key: "separator", className: "separator" }));
+                    array.push(e("li", {key: "tag", className: "tag" }, this.state.tag));
+                }
+            }
+
+            return e("ul", {key: "mode-selection", className: "mode-selection"}, array);
+        },
+        setTabAll: function() {
+            this.setState({tab: "all", clickCount: 0});
+        },
+        setTabTags: function() {
+            this.setState({tab: "tags", clickCount: 0});
+        },
+        setTabSelection: function() {
+            var newState = {tab: "selection", clickCount: this.state.clickCount + 1}; 
+            if (this.state.clickCount >= 5) {
+                newState.clickCount = 0;
+                newState.debugMenu = !this.state.debugMenu;
+            }
+
+            this.setState(newState);
+        },
+        setSortAbc: function() {
+            this.setState({sort: "abc"});
+        },
+        setSortDate: function() {
+            this.setState({sort: "date"});
+        },
+        setTag: function(tag) {
+            this.setState({tag: tag});
+        },
+        clickTag: function(target) {
+            alert("tag");
+        },
+        filter: function(items, callback) {
+            var result = [];
+            for(var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (callback(item)) {
+                    result.push(item);
+                }
+            }
+            return result;
+        },
+        getBaseList: function() {
+            var displayPrivate = this.state.displayPrivate;
+            return this.filter(pf.items, function(item) {
+                if (item.private || false) {
+                    if (displayPrivate) {
+                        return true;
+                    }
+                } else {
+                    return true;
+                }
+
+                return false;
             });
         },
+        getAllTags: function(items) {
+            var tags = {};
+            var i,k;
+    
+            for (i = 0; i < items.length; i++) {
+                if (!!items[i].tags) {
+                    for (var j = 0; j < items[i].tags.length; j++) {
+                        var tag = items[i].tags[j];
+                        if (typeof tags[tag] === "undefined") {
+                            tags[tag] = { name: tag, size: 1, count: 0 };
+                        }
+                        tags[tag].count++;
+                    }
+                }
+            }
+    
+            var result = [];
+            for (k in tags) {
+                if (tags.hasOwnProperty(k)) {
+                    result.push(tags[k]);
+                }
+            }
+    
+            result.sort(function(a, b) { return a.count - b.count; });
+    
+            var count = 5;
+    
+            for (i = 0; i < result.length; i++) {
+                result[i].size = (1 + i * count / result.length) | 0;
+            }
+    
+            result.sort(function(a, b) { return a.name.localeCompare(b.name); });
+    
+            return result;
+    
+        },
+        renderTabAll: function() {
+            var list = this.getBaseList();
+            return this.renderList(list);
+        },
+        renderTabTags: function() {
+            var list = this.getBaseList();
 
-        render: function () {
-            return e("div", null, [
-                e("h1", { key: "title" }, "To Do List"),
-                e("input", {
-                    key: "input",
-                    type: "text",
-                    value: this.state.text,
-                    onChange: this.handleEditInput
-                }),
-                e(
-                    "button",
-                    { key: "add-todo-btn", onClick: this.handleSubmit },
-                    "Add ToDo"
-                ),
-                e(
-                    "ul",
-                    { key: "todos" },
-                    this.state.items.map(item =>
-                        e(TodoItem, { key: item.id, text: item.text })
-                    )
-                )
-            ]);
+            if (this.state.tag === null) {
+                var tags = this.getAllTags(list);
+                return e("ul", {className: "tag-list"}, tags.map(function(t) { return e("li", { key: t.name, className: "size" + t.size, onClick: this.clickTag }, t.name ); }));
+            } else {
+
+                list = this.filter(list, function(item) {
+                    for(var i = 0; i < pf.selection.items.length; i++) {
+                        for(var j = 0; j < item.tags.length; j++) {
+                            if (pf.selection.items[i] == item.tags[j]) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                });
+    
+                return this.renderList(list);
+    
+            }
+        },
+        renderTabSelection: function() {
+            var list = this.getBaseList();
+
+            list = this.filter(list, function(item) {
+                for(var i = 0; i < pf.selection.items.length; i++) {
+                    if (pf.selection.items[i] == item.id) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+
+            return this.renderList(list);
+        },
+        renderList: function(items) {
+            var groups = {};
+            var groupList = [];
+
+            for(var i = 0; i < items.length; i++) {
+                var item = items[i];
+                var group = item.title.substring(0, 1);
+                if (this.state.sort == "date") {
+                    if ((item.year || 0) > 0) {
+                        group = item.year;
+                    }
+                }
+
+                if (!groups.hasOwnProperty(group)) {
+                    groups[group] = [];
+                }
+
+                groups[group].push(item);
+            }
+
+            for(var g in groups) {
+                if (groups.hasOwnProperty(g)) {
+                    groupList.push({group: g, items: groups[g]});
+                }
+            }
+
+            if (this.state.sort == "date") {
+                groupList.sort(function(a, b) { return a.group - b.group; });
+            } else {
+                groupList.sort(function(a, b) { return a.group.localeCompare(b.group); });
+            }
+
+            return e("div", {key: "list"}, groupList.map(function(g) {
+                return e(CardGroup, {key: g.group, group: g.group, items: g.items});
+            }));
+
+            //return e(CardGroup, {group: 'test', items: items});
+        },
+        renderDebugMenu: function() {
+            return e("div", {key: "debug-menu"}, "DEBUG");
         }
     });
+
+    var AppLayout = function(props) {
+        return e("div", null, [
+            e(Header, {key: "header"}),
+            e(Menu, {key: "menu"}),
+            e("main", {key: "main"})
+        ]);
+    };
 
     pf.run = function(element) {
         ReactDOM.render(e(AppLayout), element);
