@@ -1,14 +1,69 @@
 ﻿(function (pf) {
     var e = React.createElement;
 
-    function TodoItem(props) {
-        return e("li", null, props.text);
-    }
+    pf.hash = '-';
+    pf.appRef = React.createRef();
+
+    var navigate = function() {
+        var hash = window.location.hash;
+        if (hash == pf.hash) {
+            return;
+        }
+
+        pf.hash = hash;
+        var id = hash.substr(2);
+
+        for(var i = 0; i < pf.items.length; i++) {
+            if (pf.items[i].id == id) {
+                load(pf.items[i]);
+            }
+        }
+    };
+
+    var load = function(item) {
+        if (pf.loading) {
+            return;
+        }
+
+        var xhttp;
+        if (window.XMLHttpRequest) {
+            xhttp = new XMLHttpRequest();
+        } else {
+            xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        pf.appRef.current.setLoading(true);
+
+        xhttp.onerror = function() {
+            pf.appRef.current.setLoading(false);
+        }
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var content = this.responseText;
+                if (item.url.indexOf("ext") !== -1) {
+                    content = content.split(item.id + "-image").join("ext/" + item.id + "-image");
+                }
+                pf.appRef.current.setContent(content);
+            }
+        };
+
+        xhttp.open("GET", item.url, true);
+        xhttp.send();
+    };
+    
+    window.setInterval(navigate, 200);
+    window.addEventListener("hashchange", navigate);
+
+    var navigateClick = function(event) {
+        var id = event.currentTarget.dataset.id;
+        window.location.hash = "#!" + id;
+    };
  
     var Card = function(props) {
         return e("div", {className: "card-container"},
-            e("div", { className : "card" }, [
-                e("div", { key: "background", className: "card-background", style: { backgroundImage: "url('" + props.item.image + "')" } }),
+            e("div", { className : "card", "data-id" : props.item.id, onClick: navigateClick }, [
+                e("div", { key: "background", className: "card-background", style: { backgroundImage: "url('" + (props.item.image || "") + "')" } }),
                 e("div", { key: "description", className: "card-description" }, [
                     e("h3", { key: "title" }, props.item.title),
                     e("p", { key: "subtitle" }, props.item.subtitle)
@@ -30,51 +85,46 @@
         ]);
     }
 
-    var MenuToggle = function(props) {
-        return e("div", { className: "menu-toggle" }, "[toggle]");
-    }
-
-    var Title = function(props) {
-        return e("h1", null, props.text)
-    }
-
-    var MenuNavigation = function(props) {
-        return e("div", null, [
-            e("span", {key: "prev"}, "<"),
-            e("span", {key: "next"}, ">")
-        ]);
-    }
-
-    var Header = function(props) {
-        return e("header", null, [
-            e(MenuToggle, {key: "menu-toggle"}),
-            e(Title, {key: "title", text: "Index"}),
-            e(MenuNavigation, {key: "menu-navigation"})
-        ]);
-    };
-
-    var Menu = createReactClass({
+    var App = createReactClass({
         getInitialState: function() {
-            return { tab: "all", sort: "date", tag: null, displayPrivate: false, clickCount: 0, debugMenu: false };
+            return { 
+                tab: "all", sort: "date", tag: null, 
+                displayPrivate: false, clickCount: 0, showDebugMenu: false,
+                showMenu: true,
+                selectedItem: pf.items[0], 
+                loading: false, html: ""};
         },
         render: function() {
-            var array = [];
+            var menu = [];
 
-            array.push(this.renderSelection());
+            menu.push(this.renderSelection());
 
-            if (this.state.debugMenu) {
-                array.push(this.renderDebugMenu());
+            if (this.state.showDebugMenu) {
+                menu.push(this.renderDebugMenu());
             }
 
             if (this.state.tab == "all") {
-                array.push(this.renderTabAll());
+                menu.push(this.renderTabAll());
             } else if (this.state.tab == "tags") {
-                array.push(this.renderTabTags());
+                menu.push(this.renderTabTags());
             } else if (this.state.tab == "selection") {
-                array.push(this.renderTabSelection());
+                menu.push(this.renderTabSelection());
             }
 
-            return e("menu", null, array);
+            return e("div", null, [
+                e("div", {key: "overlay", className: "overlay"}, [
+                    e("header", {key: "header"}, [
+                        e("div", { key: "toggle-menu", className: "menu-toggle" }, "[toggle]"),
+                        e("h1", {key: "title"}, this.state.selectedItem.title),
+                        e("div", {key: "nav", className: "nav"}, [
+                            e("span", {key: "prev"}, "<"),
+                            e("span", {key: "next"}, ">")
+                        ])
+                    ]),
+                    e("menu", {key: "menu", className: this.state.showMenu ? "visible" : "hidden"}, menu)
+                ]),
+                e("main", {dangerouslySetInnerHTML: { __html: this.state.html}, className: this.state.loading ? "loading" : ""})
+            ]);
         },
         renderSelection: function() {
             var array = [];
@@ -127,7 +177,7 @@
             var newState = {tab: "selection", clickCount: this.state.clickCount + 1}; 
             if (this.state.clickCount >= 5) {
                 newState.clickCount = 0;
-                newState.debugMenu = !this.state.debugMenu;
+                newState.showDebugMenu = !this.state.showDebugMenu;
             }
 
             this.setState(newState);
@@ -144,9 +194,15 @@
         clearTag: function() {
             this.setState({tag: null});
         },
-        clickTag: function(target) {
-            var tag = target.target.dataset.tag;
+        clickTag: function(event) {
+            var tag = event.target.dataset.tag;
             this.setTag(tag);
+        },
+        setLoading: function(value) {
+            this.setState({loading: value});
+        },
+        setContent: function(html) {
+            this.setState({html: html, showMenu: false});
         },
         filter: function(items, callback) {
             var result = [];
@@ -296,18 +352,10 @@
                 e("input", {key: "display-private", type: "checkbox", onChange: this.displayPrivateChange}),
                 e("label", {key: "display-private-label"}, "zobrazit skryté")
             ]);
-        }
+        },
     });
 
-    var AppLayout = function(props) {
-        return e("div", null, [
-            e(Header, {key: "header"}),
-            e(Menu, {key: "menu"}),
-            e("main", {key: "main"})
-        ]);
-    };
-
     pf.run = function(element) {
-        ReactDOM.render(e(AppLayout), element);
+        ReactDOM.render(e(App, {ref: pf.appRef}), element);
     };
 })(window.pf);

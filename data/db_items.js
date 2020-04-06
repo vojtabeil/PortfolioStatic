@@ -2,7 +2,7 @@
     {
         title: "Iron Maiden",
         id: "iron_maiden",
-        url: "/test/iron_maiden.html",
+        url: "test/iron_maiden.html",
         tags: ["heavy metal", "metal", "hard rock", "rock"],
         year: 1975,
         subtitle: "New wave of British heavy metal",
@@ -12,7 +12,7 @@
     {
         title: "Kamelot",
         id: "kamelot",
-        url: "/test/kamelot.html",
+        url: "test/kamelot.html",
         tags: ["power metal", "symphonic metal", "melodic metal", "metal"],
         year: 1991,
         subtitle: "",
@@ -22,7 +22,7 @@
     {
         title: "Nightwish",
         id: "nightwish",
-        url: "/test/nightwish.html",
+        url: "test/nightwish.html",
         tags: ["power metal", "symphonic metal", "gothic metal", "metal"],
         year: 1996,
         subtitle: "",
@@ -32,7 +32,7 @@
     {
         title: "Amorphis",
         id: "amorphis",
-        url: "/test/amorphis.html",
+        url: "test/amorphis.html",
         tags: ["progressive metal", "melodic death metal", "death metal", "metal"],
         year: 1990,
         subtitle: "",
@@ -42,7 +42,7 @@
     {
         title: "Helloween",
         id: "helloween",
-        url: "/test/helloween.html",
+        url: "test/helloween.html",
         tags: ["power metal", "heavy metal", "speed metal", "metal"],
         year: 1990,
         subtitle: "",
@@ -52,7 +52,7 @@
     {
         title: "Avantasia",
         id: "avantasia",
-        url: "/test/avantasia.html",
+        url: "test/avantasia.html",
         tags: ["power metal", "symphonic metal", "metal opera", "metal", "melodic metal"],
         year: 1999,
         subtitle: "Metal opera",
@@ -62,7 +62,7 @@
     {
         title: "Amaranthe",
         id: "amaranthe",
-        url: "/test/amaranthe.html",
+        url: "test/amaranthe.html",
         tags: ["melodic death metal", "power metal", "modern metal", "metal", "pop metal"],
         year: 2008,
         subtitle: "",
@@ -72,7 +72,7 @@
     {
         title: "Amberian Dawn",
         id: "amberian_dawn",
-        url: "/test/amberian_dawn.html",
+        url: "test/amberian_dawn.html",
         tags: ["symphonic metal", "power metal", "female fronted metal", "metal", "pop metal"],
         year: 2006,
         subtitle: "",
@@ -82,7 +82,7 @@
     {
         title: "Allen/Lande",
         id: "allen_lande",
-        url: "/test/allen_lande.html",
+        url: "test/allen_lande.html",
         tags: ["power metal", "heavy metal", "hard rock", "melodic metal", "progressive metal"],
         year: 2005,
         subtitle: "",
@@ -92,7 +92,7 @@
     {
         title: "Petra Janů",
         id: "petra_janu",
-        url: "/test/petra_janu.html",
+        url: "test/petra_janu.html",
         tags: ["progressive rock", "czech", "czech pop", "rock"],
         subtitle: "",
         image: 'test/petra_janu_image01.jpg',
