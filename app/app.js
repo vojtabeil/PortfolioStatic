@@ -125,12 +125,12 @@
             return e("div", null, [
                 e("div", {key: "overlay", className: "overlay"}, [
                     e("header", {key: "header"}, [
-                        e("img", { key: "toggle-menu", className: this.state.showMenu ? "menu-toggle open" : "menu-toggle closed", onClick: this.toggleMenu, src: "app/head-hamburger.svg" }),
+                        e("img", { key: "toggle-menu", className: this.state.showMenu ? "menu-toggle open" : "menu-toggle closed", onClick: this.toggleMenu, src: this.state.showMenu ? "app/head-close.svg" : "app/head-open.svg" }),
                         e("h1", {key: "title"}, this.state.selectedItem ? this.state.selectedItem.title : "#")
-                        ,e("nav", {key: "nav" }, [
-                            e("span", {key: "prev", onClick: this.navigatePrev}, "<"),
-                            e("span", {key: "next", onClick: this.navigateNext}, ">")
-                        ])
+                        // ,e("nav", {key: "nav" }, [
+                        //     e("span", {key: "prev", onClick: this.navigatePrev}, "<"),
+                        //     e("span", {key: "next", onClick: this.navigateNext}, ">")
+                        // ])
                     ]),
                     e("menu", {key: "menu", className: this.state.showMenu ? "visible" : "hidden"}, this.state.showMenu ? menu : [])
                 ]),

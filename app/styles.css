@@ -3,18 +3,16 @@ html, body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #fff;
-}
-
-body {
   height: 100%;
 }
 
 menu {
   color: black;
-  background-color: #ECECEC;
+  background-color: #DCDCDC;
   padding: 0;
   margin: 0;
   user-select: none;
+  min-height: 100%;
 }
 
 ul.mode-selection {
