@@ -1,0 +1,157 @@
+html, body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Appereance */
+
+nav {
+    font-size: 12pt;
+    color: black;
+    background-color: #ccc;
+    padding: 8pt;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 3px 3px 8px #888888;
+}
+
+menu {
+    color: white;
+    background-color: #008DD2;
+    user-select: none;
+    padding: 0;
+    margin: 0;
+
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-inline-start: 0;
+}
+
+div.origin ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+}
+
+div.origin ul li {
+    /* display: inline; */
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+ul.tabs ul {
+    display: flex;
+    margin-left: 8pt;
+    /* color: #255A74; */
+    /* padding: 0 4pt; */
+    /* margin: 0 4pt; */
+}
+
+ul.tabs ul li {
+    /* flex: 1; */
+    /* display: block; */
+    text-align: center;
+    width: 33.3%;
+}
+
+ul.tabs li span {
+    font-size: 22pt;
+    padding: 4pt;
+    /* padding: 4pt; */
+    /* margin: 0pt 4pt; */
+}
+
+div.origin li.active, div.origin li:hover {
+    /* color: white; */
+    background-color: #255A74;
+    /* border-bottom: 2px solid white; */
+}
+
+article {
+    padding: 8pt;
+}
+
+article img {
+    max-width: 100%;
+}
+
+ul.tag-list {
+    margin: 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+}
+  
+ul.tag-list li {
+    cursor: pointer;
+    display: inline;
+    padding: 2pt;
+    margin: 0pt 4pt;
+}
+  
+ul.tag-list li:hover {
+    /* background-color: white; */
+    /* color: #008DD2; */
+    background-color: #255A74;
+}
+  
+ul.tag-list li.size1 { font-size: 8pt; }
+ul.tag-list li.size2 { font-size: 10pt; }
+ul.tag-list li.size3 { font-size: 12pt; }
+ul.tag-list li.size4 { font-size: 16pt; }
+ul.tag-list li.size5 { font-size: 18pt; }
+
+
+div.card-collection {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+menu h2 {
+    margin: 0;
+    padding: 0;
+    padding-left: 8pt;
+    padding-top: 4pt;
+    font-weight: normal;
+    font-size: 16pt;
+}
+
+div.card-container { 
+    width: 33%; 
+}
+
+div.card-container {
+    cursor: pointer;
+}
+
+div.card {
+    padding: 8pt;
+}
+
+div.card h3 {
+    font-size: 10pt;
+    font-weight: normal;
+    padding: 0;
+    padding-top: 4pt;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+div.card-background {
+    height: 100pt;
+    background-position: center;
+    background-size: cover;
+}
+
+div.card-container:hover {
+    background-color: #255A74;
+    /* background-color: white; */
+}
+

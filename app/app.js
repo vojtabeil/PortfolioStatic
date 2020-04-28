@@ -75,8 +75,8 @@
             e("div", { className : "card", "data-id" : props.item.id, onClick: navigateClick }, [
                 e("div", { key: "background", className: "card-background", style: { backgroundImage: "url('" + (props.item.image || "") + "')" } }),
                 e("div", { key: "description", className: "card-description" }, [
-                    e("h3", { key: "title" }, props.item.title),
-                    e("p", { key: "subtitle" }, props.item.subtitle)
+                    e("h3", { key: "title" }, props.item.title)
+                    //e("p", { key: "subtitle" }, props.item.subtitle)
                     ])
                 ])
         );
@@ -122,34 +122,42 @@
                 menu.push(this.renderTabSelection());
             }
 
-            return e("div", null, [
-                e("div", {key: "overlay", className: "overlay"}, [
-                    e("header", {key: "header"}, [
-                        e("img", { key: "toggle-menu", className: this.state.showMenu ? "menu-toggle open" : "menu-toggle closed", onClick: this.toggleMenu, src: this.state.showMenu ? "app/head-close.svg" : "app/head-open.svg" }),
-                        e("h1", {key: "title"}, this.state.selectedItem ? this.state.selectedItem.title : "#")
-                        // ,e("nav", {key: "nav" }, [
-                        //     e("span", {key: "prev", onClick: this.navigatePrev}, "<"),
-                        //     e("span", {key: "next", onClick: this.navigateNext}, ">")
-                        // ])
-                    ]),
-                    e("menu", {key: "menu", className: this.state.showMenu ? "visible" : "hidden"}, this.state.showMenu ? menu : [])
-                ]),
-                e("main", {key: "main", dangerouslySetInnerHTML: { __html: this.state.showMenu ? "" : this.state.html}, className: this.state.loading ? "loading" : ""})
+            return e('main', {className: ''}, [
+                e('menu', {key: 'menu'}, menu),
+                e('article', {key: 'article', dangerouslySetInnerHTML: { __html: this.state.showMenu ? "" : this.state.html}, className: this.state.loading ? "loading" : ""}),
+                e('nav', {key: 'nav'}, 
+                    e('div', {className: 'hamburger'}, 'Menu'))
             ]);
+
+            // return e("div", null, [
+            //     e("div", {key: "overlay", className: "overlay"}, [
+            //         e("header", {key: "header"}, [
+            //             e("img", { key: "toggle-menu", className: this.state.showMenu ? "menu-toggle open" : "menu-toggle closed", onClick: this.toggleMenu, src: this.state.showMenu ? "app/head-close.svg" : "app/head-open.svg" }),
+            //             e("h1", {key: "title"}, this.state.selectedItem ? this.state.selectedItem.title : "#")
+            //             // ,e("nav", {key: "nav" }, [
+            //             //     e("span", {key: "prev", onClick: this.navigatePrev}, "<"),
+            //             //     e("span", {key: "next", onClick: this.navigateNext}, ">")
+            //             // ])
+            //         ]),
+            //         e("menu", {key: "menu", className: this.state.showMenu ? "visible" : "hidden"}, this.state.showMenu ? menu : [])
+            //     ]),
+            //     e("main", {key: "main", dangerouslySetInnerHTML: { __html: this.state.showMenu ? "" : this.state.html}, className: this.state.loading ? "loading" : ""})
+            // ]);
         },
         renderSelection: function() {
-            var array = [];
+            var tabs = [];
+            var sorts = [];
 
-            array.push(e("li", {key: "all", className: this.state.tab == "all" ? "active" : "", onClick: this.setTabAll }, [
-                e("img", {key: "icon", src: "app/tab-all.svg"}),
+            tabs.push(e("li", {key: "all", className: this.state.tab == "all" ? "active" : "", onClick: this.setTabAll }, [
+                //e("img", {key: "icon", src: "app/tab-all.svg"}),
                 e("span", {key: "label"}, "seznam")
             ]));
-            array.push(e("li", {key: "tags", className: this.state.tab == "tags" ? "active" : "", onClick: this.setTabTags }, [
-                e("img", {key: "icon", src: "app/tab-tags.svg"}),
+            tabs.push(e("li", {key: "tags", className: this.state.tab == "tags" ? "active" : "", onClick: this.setTabTags }, [
+                //e("img", {key: "icon", src: "app/tab-tags.svg"}),
                 e("span", {key: "label"}, "tagy")
             ]));
-            array.push(e("li", {key: "selection", className: this.state.tab == "selection" ? "active" : "", onClick: this.setTabSelection }, [
-                e("img", {key: "icon", src: "app/tab-selection.svg"}),
+            tabs.push(e("li", {key: "selection", className: this.state.tab == "selection" ? "active" : "", onClick: this.setTabSelection }, [
+                //e("img", {key: "icon", src: "app/tab-selection.svg"}),
                 e("span", {key: "label"}, "výběr")
             ]));
 
@@ -159,24 +167,29 @@
                 showSort = true;
             } else if (this.state.tab == "tags") {
                 if (this.state.tag !== null) {
-                    array.push(e("li", {key: "separator1", className: "separator" }));
-                    array.push(e("li", {key: "tag", className: "tag", onClick: this.clearTag }, this.state.tag));
+                    //tabs.push(e("li", {key: "separator1", className: "separator" }));
+                    //tabs.push(e("li", {key: "tag", className: "tag", onClick: this.clearTag }, this.state.tag));
                     showSort = true;
                 }
             }
 
             if (showSort) {
-                array.push(e("li", {key: "separator2", className: "separator" }));
+                //tabs.push(e("li", {key: "separator2", className: "separator" }));
 
-                array.push(e("li", {key: "abc", className: this.state.sort == "abc" ? "active" : "", onClick: this.setSortAbc }, [
+                sorts.push(e("li", {key: "abc", className: this.state.sort == "abc" ? "active" : "", onClick: this.setSortAbc }, [
                     e("img", {key: "icon", src: "app/sort-abc.svg"})
                 ]));
-                array.push(e("li", {key: "date", className: this.state.sort == "date" ? "active" : "", onClick: this.setSortDate }, [
+                sorts.push(e("li", {key: "date", className: this.state.sort == "date" ? "active" : "", onClick: this.setSortDate }, [
                     e("img", {key: "icon", src: "app/sort-date.svg"})
                 ]));
             }
 
-            return e("ul", {key: "mode-selection", className: "mode-selection"}, array);
+            return e('div', {className: 'origin'}, [
+                e('ul', {key: 'tabs', className: 'tabs'}, tabs),
+                e('ul', {key: 'sorts', className: 'sorts'}, sorts)
+            ]);
+
+            // return e("ul", {key: "mode-selection", className: "mode-selection"}, tabs);
         },
         toggleMenu: function() {
             this.setState({showMenu: !this.state.showMenu});

@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Creator: CorelDRAW 2018 (64-Bit Evaluation Version) -->
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="0.522402in" height="0.363185in" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 154.84 107.65"
+<!-- Creator: CorelDRAW 2018 (64-Bit) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="0.697886in" height="0.380205in" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 501.78 273.37"
  xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
   <style type="text/css">
    <![CDATA[
-    .fil0 {fill:#FEFEFE}
-    .fil1 {fill:#FEFEFE;fill-rule:nonzero}
+    .str0 {stroke:#FEFEFE;stroke-width:14.99;stroke-miterlimit:2.61313}
+    .str1 {stroke:#FEFEFE;stroke-width:4.99;stroke-miterlimit:2.61313}
+    .fil0 {fill:none}
+    .fil1 {fill:#FEFEFE}
    ]]>
   </style>
  </defs>
  <g id="Layer_x0020_1">
   <metadata id="CorelCorpID_0Corel-Layer"/>
-  <polygon class="fil0" points="21.99,86.1 21.99,12.2 13.62,12.2 13.62,86.1 -0,86.1 17.81,106.4 35.62,86.1 "/>
-  <path class="fil1" d="M64.11 13.8l0 -10.6 0 -3.21 3.21 0 10.68 0 3.2 0 0 3.21 0 10.6 27.87 0 0 -10.6 0 -3.21 3.21 0 10.6 0 3.21 0 0 3.21 0 10.6 25.55 0 3.21 0 0 3.21 0 10.51 0 3.29 0 3.21 0 70.43 0 3.21 -3.21 0 -114.5 0 -3.21 0 0 -3.21 0 -70.43 0 -3.21 0 -3.29 0 -10.51 0 -3.21 3.21 0 26.98 0 -0 0zm59.3 46.39l18.34 0 0 17.63 -18.34 0 0 -17.63zm0 -18.79l18.34 0 0 17.63 -18.34 0 0 -17.63zm-19.5 37.57l18.25 0 0 17.63 -18.25 0 0 -17.63zm0 -18.79l18.25 0 0 17.63 -18.25 0 0 -17.63zm0 -18.79l18.25 0 0 17.63 -18.25 0 0 -17.63zm-19.5 37.57l18.25 0 0 17.63 -18.25 0 0 -17.63zm0 -18.79l18.25 0 0 17.63 -18.25 0 0 -17.63zm0 -18.79l18.25 0 0 17.63 -18.25 0 0 -17.63zm-19.5 37.57l18.25 0 0 17.63 -18.25 0 0 -17.63zm0 -18.79l18.25 0 0 17.63 -18.25 0 0 -17.63zm-19.59 18.79l18.25 0 0 17.63 -18.25 0 0 -17.63zm0 -18.79l18.25 0 0 17.63 -18.25 0 0 -17.63zm25.29 -46.39l4.18 0 0 -7.3 -4.18 0 0 7.3zm44.87 0l4.18 0 0 -7.3 -4.18 0 0 7.3zm32.94 20.21l-22.35 0 -3.21 0 -10.6 0 -3.21 0 -27.87 0 -3.2 0 -10.68 0 -3.21 0 -23.68 0 0 67.22 108 0 0 -67.22z"/>
+  <rect class="fil0" x="-0" y="0" width="501.78" height="273.37"/>
+  <rect class="fil0 str0" x="151.67" y="50.54" width="198.44" height="172.23"/>
+  <rect class="fil1 str1" x="151.67" y="50.54" width="198.44" height="35.55"/>
+  <rect class="fil1" x="182.06" y="108.11" width="38.83" height="35.13"/>
+  <line class="fil0 str0" x1="175.51" y1="17.29" x2="175.51" y2= "54.79" />
+  <line class="fil0 str0" x1="330.03" y1="16.2" x2="330.03" y2= "53.63" />
  </g>
 </svg>
