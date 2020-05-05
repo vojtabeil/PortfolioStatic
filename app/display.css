@@ -151,6 +151,7 @@ div.card-background {
     height: 100pt;
     background-position: center;
     background-size: cover;
+    box-shadow: 4px 4px 12px 0px rgba(0,0,0,0.5);
 }
 
 div.card-container:hover {
