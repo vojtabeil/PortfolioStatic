@@ -32,43 +32,35 @@ menu {
 
 div.origin ul {
     padding: 0;
-    margin: 0;
+    /* margin: 0; */
     list-style-type: none;
-    display: flex;
 }
 
 div.origin ul li {
-    /* display: inline; */
+    display: inline;
+    font-size: 16pt;
     text-transform: uppercase;
     cursor: pointer;
 }
 
-ul.tabs ul {
-    display: flex;
-    margin-left: 8pt;
-    /* color: #255A74; */
-    /* padding: 0 4pt; */
-    /* margin: 0 4pt; */
+ul.sorts li img {
+    height: 18pt;
 }
 
-ul.tabs ul li {
-    /* flex: 1; */
-    /* display: block; */
-    text-align: center;
-    width: 33.3%;
+ul.sorts {
+    margin-left: 64pt;
 }
 
-ul.tabs li span {
-    font-size: 22pt;
+div.origin li span,
+div.origin li img {
     padding: 4pt;
-    /* padding: 4pt; */
-    /* margin: 0pt 4pt; */
+    margin-left: 12pt;
+    border-bottom: 4px solid transparent;
 }
 
-div.origin li.active, div.origin li:hover {
-    /* color: white; */
-    background-color: #255A74;
-    /* border-bottom: 2px solid white; */
+div.origin li.active span, div.origin li:hover span,
+div.origin li.active img, div.origin li:hover img {
+    border-bottom: 4px solid #255A74;
 }
 
 article {
@@ -81,6 +73,7 @@ article img {
 
 ul.tag-list {
     margin: 0;
+    margin-top: 2em;
     padding: 0;
     display: block;
     text-align: center;
@@ -105,7 +98,6 @@ ul.tag-list li.size3 { font-size: 12pt; }
 ul.tag-list li.size4 { font-size: 16pt; }
 ul.tag-list li.size5 { font-size: 18pt; }
 
-
 div.card-collection {
     display: flex;
     flex-wrap: wrap;
@@ -118,6 +110,16 @@ menu h2 {
     padding-top: 4pt;
     font-weight: normal;
     font-size: 16pt;
+}
+
+menu h2.tag {
+    cursor: pointer;
+    border-bottom: 4px solid transparent;
+    margin-bottom: 1em;
+}
+
+menu h2.tag:hover * {
+    border-bottom: 4px solid #255A74;
 }
 
 div.card-container { 
@@ -145,6 +147,7 @@ div.card h3 {
 }
 
 div.card-background {
+    background-color: white;
     height: 100pt;
     background-position: center;
     background-size: cover;

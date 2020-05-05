@@ -28,6 +28,10 @@ menu {
     width: 100%;
 }
 
+div.origin {
+    padding-top: 32pt;
+}
+
 main.menu menu {
     display: block;
 }
@@ -85,5 +89,9 @@ main.menu article {
 
     main.menu article {
         display: block;
-    }    
+    }
+
+    div.origin {
+        padding-top: 8pt;
+    }
 }

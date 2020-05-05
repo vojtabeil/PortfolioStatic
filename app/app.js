@@ -155,8 +155,6 @@
                 showSort = true;
             } else if (this.state.tab == "tags") {
                 if (this.state.tag !== null) {
-                    //tabs.push(e("li", {key: "separator1", className: "separator" }));
-                    //tabs.push(e("li", {key: "tag", className: "tag", onClick: this.clearTag }, this.state.tag));
                     showSort = true;
                 }
             }
@@ -174,9 +172,10 @@
             array.push(e('ul', {key: 'sorts', className: 'sorts'}, sorts));
 
             if (this.state.tab === 'tags' && this.state.tag !== null) {
-                array.push(e('h2', {key: 'selection'}, [
+                array.push(e('h2', {key: 'selection', className: 'tag', onClick: this.clearTag}, [
+                    e('span', {key: 'pre-text', className: 'pre-text'}, 'Tag: '),
                     e('span', {key: 'header', className: 'header'}, this.state.tag),
-                    e('span', {key: 'clear-tag', className: 'clear-tag', onClick: this.clearTag}, '×'),
+                    e('span', {key: 'header', className: 'header'}, ' ×')
                 ]));
             }
 
@@ -207,9 +206,7 @@
             this.setState({sort: "date"});
         },
         setTag: function(tag) {
-            var elem = document.querySelector('menu');
-            elem.scrollTop = 0;
-
+            document.querySelector('menu').scrollTop = 0;
             this.setState({tag: tag});
         },
         clearTag: function() {
