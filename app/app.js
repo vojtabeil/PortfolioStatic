@@ -34,6 +34,7 @@
 
         if (item.content) {
             pf.appRef.current.setContent(item, item.content);
+            window.scrollTo(0, 0);
             return;
         }
 
@@ -51,6 +52,7 @@
                 }
                 pf.appRef.current.setContent(item, content);
                 item.content = content;
+                window.scrollTo(0, 0);
             }
         };
 
@@ -126,27 +128,13 @@
                 e('menu', {key: 'menu'}, menu),
                 e('article', {key: 'article', dangerouslySetInnerHTML: { __html: this.state.showMenu ? "" : this.state.html}, className: this.state.loading ? "loading" : ""}),
                 e('nav', {key: 'nav'}, 
-                    e('div', {className: 'hamburger'}, 'Menu'))
+                e('div', {key: 'hamburger', className: 'hamburger'}, 'Menu'))
             ]);
-
-            // return e("div", null, [
-            //     e("div", {key: "overlay", className: "overlay"}, [
-            //         e("header", {key: "header"}, [
-            //             e("img", { key: "toggle-menu", className: this.state.showMenu ? "menu-toggle open" : "menu-toggle closed", onClick: this.toggleMenu, src: this.state.showMenu ? "app/head-close.svg" : "app/head-open.svg" }),
-            //             e("h1", {key: "title"}, this.state.selectedItem ? this.state.selectedItem.title : "#")
-            //             // ,e("nav", {key: "nav" }, [
-            //             //     e("span", {key: "prev", onClick: this.navigatePrev}, "<"),
-            //             //     e("span", {key: "next", onClick: this.navigateNext}, ">")
-            //             // ])
-            //         ]),
-            //         e("menu", {key: "menu", className: this.state.showMenu ? "visible" : "hidden"}, this.state.showMenu ? menu : [])
-            //     ]),
-            //     e("main", {key: "main", dangerouslySetInnerHTML: { __html: this.state.showMenu ? "" : this.state.html}, className: this.state.loading ? "loading" : ""})
-            // ]);
         },
         renderSelection: function() {
             var tabs = [];
             var sorts = [];
+            var array = [];
 
             tabs.push(e("li", {key: "all", className: this.state.tab == "all" ? "active" : "", onClick: this.setTabAll }, [
                 //e("img", {key: "icon", src: "app/tab-all.svg"}),
@@ -174,8 +162,6 @@
             }
 
             if (showSort) {
-                //tabs.push(e("li", {key: "separator2", className: "separator" }));
-
                 sorts.push(e("li", {key: "abc", className: this.state.sort == "abc" ? "active" : "", onClick: this.setSortAbc }, [
                     e("img", {key: "icon", src: "app/sort-abc.svg"})
                 ]));
@@ -184,12 +170,17 @@
                 ]));
             }
 
-            return e('div', {className: 'origin'}, [
-                e('ul', {key: 'tabs', className: 'tabs'}, tabs),
-                e('ul', {key: 'sorts', className: 'sorts'}, sorts)
-            ]);
+            array.push(e('ul', {key: 'tabs', className: 'tabs'}, tabs));
+            array.push(e('ul', {key: 'sorts', className: 'sorts'}, sorts));
 
-            // return e("ul", {key: "mode-selection", className: "mode-selection"}, tabs);
+            if (this.state.tab === 'tags' && this.state.tag !== null) {
+                array.push(e('h2', {}, [
+                    e('span', {key: 'header', className: 'header'}, this.state.tag),
+                    e('span', {key: 'clear-tag', className: 'clear-tag', onClick: this.clearTag}, '×'),
+                ]));
+            }
+
+            return e('div', {className: 'origin'}, array);
         },
         toggleMenu: function() {
             this.setState({showMenu: !this.state.showMenu});
@@ -327,7 +318,7 @@
                 return e("ul", {className: "tag-list"}, tags.map(function(t) { 
                     return e("li", { key: t.name, className: "size" + t.size }, [
                         e("span", { key: "tag", onClick: clickTag, "data-tag": t.name}, t.name),
-                        e("wbr", {key: "wbr"})
+                        e("wbr", { key: "wbr" })
                     ] ); }));
             } else {
 
