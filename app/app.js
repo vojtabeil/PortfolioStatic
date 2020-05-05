@@ -124,11 +124,11 @@
                 menu.push(this.renderTabSelection());
             }
 
-            return e('main', {className: ''}, [
+            return e('main', {className: this.state.showMenu ? 'menu' : ''}, [
                 e('menu', {key: 'menu'}, menu),
-                e('article', {key: 'article', dangerouslySetInnerHTML: { __html: this.state.showMenu ? "" : this.state.html}, className: this.state.loading ? "loading" : ""}),
-                e('nav', {key: 'nav'}, 
-                e('div', {key: 'hamburger', className: 'hamburger'}, 'Menu'))
+                e('article', {key: 'article', dangerouslySetInnerHTML: { __html: this.state.html }, className: this.state.loading ? "loading" : ""}),
+                e('nav', {key: 'nav', onClick: this.toggleMenu}, 
+                    e('div', {key: 'hamburger', className: 'hamburger'}, this.state.showMenu ? '× Menu' : '☰ Menu'))
             ]);
         },
         renderSelection: function() {
@@ -174,13 +174,13 @@
             array.push(e('ul', {key: 'sorts', className: 'sorts'}, sorts));
 
             if (this.state.tab === 'tags' && this.state.tag !== null) {
-                array.push(e('h2', {}, [
+                array.push(e('h2', {key: 'selection'}, [
                     e('span', {key: 'header', className: 'header'}, this.state.tag),
                     e('span', {key: 'clear-tag', className: 'clear-tag', onClick: this.clearTag}, '×'),
                 ]));
             }
 
-            return e('div', {className: 'origin'}, array);
+            return e('div', {key: 'selection', className: 'origin'}, array);
         },
         toggleMenu: function() {
             this.setState({showMenu: !this.state.showMenu});
@@ -207,6 +207,9 @@
             this.setState({sort: "date"});
         },
         setTag: function(tag) {
+            var elem = document.querySelector('menu');
+            elem.scrollTop = 0;
+
             this.setState({tag: tag});
         },
         clearTag: function() {
@@ -392,7 +395,7 @@
                 }
             }
 
-            return e("div", {key: "list"}, groupList.map(function(g) {
+            return e("div", {key: 'list'}, groupList.map(function(g) {
                 return e(CardGroup, {key: g.group, group: g.group, items: g.items});
             }));
         },

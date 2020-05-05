@@ -12,7 +12,7 @@ div#root {
 
 nav {
     position: fixed;
-    top: 1em;
+    top: 0;
     left: 0;
 }
 
@@ -82,5 +82,8 @@ main.menu article {
         padding-left: 400px;
         /* display: table-cell; */
     }
-}
 
+    main.menu article {
+        display: block;
+    }    
+}
