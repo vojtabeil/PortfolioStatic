@@ -271,7 +271,8 @@
         },
         getAllTags: function(items) {
             var tags = {};
-            var i,k;
+            var c;
+            var i,j,k;
     
             for (i = 0; i < items.length; i++) {
                 if (!!items[i].tags) {
@@ -295,15 +296,31 @@
             result.sort(function(a, b) { return a.count - b.count; });
     
             var count = 5;
+
+            // var counts = [];
+            // for (i = 0; i < count; i++) {
+            //     counts.push(result[parseInt((count - i - 1) * result.length / count)].count);
+            // }
     
             for (i = 0; i < result.length; i++) {
                 result[i].size = (1 + i * count / result.length) | 0;
             }
+
+            // for(i = 0; i < result.length; i++) {
+            //     c = 0;
+            //     for(j = 0; j < counts.length; j++) {
+            //         if (result[i].count > counts[j]) {
+            //             c = j;
+            //             break;
+            //         }
+            //     }
+
+            //     result[i].size = c;
+            // }
     
             result.sort(function(a, b) { return a.name.localeCompare(b.name); });
     
             return result;
-    
         },
         renderTabAll: function() {
             var list = this.getBaseList();
@@ -321,7 +338,6 @@
                         e("wbr", { key: "wbr" })
                     ] ); }));
             } else {
-
                 var tag = this.state.tag;
                 list = this.filter(list, function(item) {
                     for(var i = 0; i < item.tags.length; i++) {
