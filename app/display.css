@@ -154,8 +154,7 @@ div.card-background {
     box-shadow: 4px 4px 12px 0px rgba(0,0,0,0.5);
 }
 
-div.card-container:hover {
+div.card-container:hover, div.card-collection div.active {
     background-color: #255A74;
-    /* background-color: white; */
 }
 

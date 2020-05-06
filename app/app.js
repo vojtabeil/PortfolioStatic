@@ -3,6 +3,7 @@
 
     pf.hash = '-';
     pf.appRef = React.createRef();
+    pf.item = {};
 
     var navigateCallback = function() {
         var hash = window.location.hash;
@@ -21,6 +22,7 @@
     };
 
     var load = function(item) {
+
         if (pf.loading) {
             return;
         }
@@ -33,6 +35,7 @@
         }
 
         if (item.content) {
+            pf.item = item;
             pf.appRef.current.setContent(item, item.content);
             window.scrollTo(0, 0);
             return;
@@ -50,6 +53,7 @@
                 if (item.url.indexOf("ext") !== -1) {
                     content = content.split(item.id + "-image").join("ext/" + item.id + "-image");
                 }
+                pf.item = item;
                 pf.appRef.current.setContent(item, content);
                 item.content = content;
                 window.scrollTo(0, 0);
@@ -73,7 +77,7 @@
     };
  
     var Card = function(props) {
-        return e("div", {className: "card-container"},
+        return e("div", {className: "card-container" + (props.item.id === pf.item.id ? " active" : "")},
             e("div", { className : "card", "data-id" : props.item.id, onClick: navigateClick }, [
                 e("div", { key: "background", className: "card-background", style: { backgroundImage: "url('" + (props.item.image || "") + "')" } }),
                 e("div", { key: "description", className: "card-description" }, [
