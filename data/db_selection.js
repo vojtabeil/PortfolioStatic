@@ -1,6 +1,1 @@
-﻿window.pf.selection = {
-    name: 'Best',
-    items: [
-        'helloween', 'nightwish'
-    ]
-};
+﻿window.pf.selection = {"name":"z","items":["a","b"]};

@@ -63,7 +63,18 @@
         xhttp.open("GET", item.url, true);
         xhttp.send();
     };
-    
+
+    if (window.localStorage)
+    {
+        var selectionName = window.localStorage.getItem('name');
+        var selectionItems = window.localStorage.getItem('items');
+
+        if (selectionName !== null && selectionItems !== null) {
+            window.pf.selection.name = selectionName;
+            window.pf.selection.items = selectionItems.split(',');
+        }
+    }
+
     window.setInterval(navigateCallback, 200);
     window.addEventListener("hashchange", navigateCallback);
 
@@ -105,10 +116,14 @@
         getInitialState: function() {
             return { 
                 tab: "all", sort: "date", tag: null, 
-                displayPrivate: false, clickCount: 0, showDebugMenu: false,
+                displayPrivate: false, clickCount: 0, 
                 showMenu: true,
                 selectedItem: null, 
-                loading: false, html: ""};
+                loading: false, 
+                html: "",
+                showDebugMenu: true,
+                debugItems: {}
+            };
         },
         itemList: [],
         render: function() {
@@ -141,16 +156,13 @@
             var array = [];
 
             tabs.push(e("li", {key: "all", className: this.state.tab == "all" ? "active" : "", onClick: this.setTabAll }, [
-                //e("img", {key: "icon", src: "app/tab-all.svg"}),
                 e("span", {key: "label"}, "seznam")
             ]));
             tabs.push(e("li", {key: "tags", className: this.state.tab == "tags" ? "active" : "", onClick: this.setTabTags }, [
-                //e("img", {key: "icon", src: "app/tab-tags.svg"}),
                 e("span", {key: "label"}, "tagy")
             ]));
             tabs.push(e("li", {key: "selection", className: this.state.tab == "selection" ? "active" : "", onClick: this.setTabSelection }, [
-                //e("img", {key: "icon", src: "app/tab-selection.svg"}),
-                e("span", {key: "label"}, "výběr")
+                e("span", {key: "label"}, window.pf.selection.name)
             ]));
 
             var showSort = false;
@@ -416,13 +428,34 @@
                 return e(CardGroup, {key: g.group, group: g.group, items: g.items});
             }));
         },
-        displayPrivateChange : function(event) {
+        debugDisplayPrivateChange : function(event) {
             this.setState({displayPrivate: !!event.target.value});
+        },
+        debugDownloadJson: function(event) {
+            var filename = "db_selection.js";
+            var data = 'window.pf.selection = ' + window.JSON.stringify({name: 'z', items: ['a', 'b']}) + ";";
+            var blob = new Blob([data], { type: 'text/json' });
+            if (window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveBlob(blob, filename);
+            }
+            else {
+                var elem = window.document.createElement('a');
+                elem.href = window.URL.createObjectURL(blob);
+                elem.download = filename;
+                document.body.appendChild(elem);
+                elem.click();
+                document.body.removeChild(elem);
+            }
         },
         renderDebugMenu: function() {
             return e("div", {key: "debug-menu", className: "debug-menu"}, [
-                e("input", {key: "display-private", type: "checkbox", onChange: this.displayPrivateChange}),
-                e("label", {key: "display-private-label"}, "zobrazit skryté")
+                e("input", {key: "display-private", type: "checkbox", onChange: this.debugDisplayPrivateChange}),
+                e("label", {key: "display-private-label"}, "zobrazit skryté"),
+                e("div", {key: "buttons"}, [
+                    e("button", {key: "button-save", onClick: this.debugSaveLocalStorage}, "Uložit localStorage"),
+                    e("button", {key: "button-json", onClick: this.debugDownloadJson}, "Stáhnout JSON")
+                ]),
+                e("div", {key: "items"}, [])
             ]);
         },
     });
