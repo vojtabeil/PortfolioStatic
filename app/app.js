@@ -88,41 +88,57 @@
     };
  
     var Card = function(props) {
+
+        var debugClick = function(event) {
+            var id = event.target.dataset.id;
+            var items = props.debug.state.debugItems;
+            items[id] = event.target.checked;
+            props.debug.setState({debugItems: items});
+        };
+
         return e("div", {className: "card-container" + (props.item.id === pf.item.id ? " active" : "")},
             e("div", { className : "card", "data-id" : props.item.id, onClick: navigateClick }, [
                 e("div", { key: "background", className: "card-background", style: { backgroundImage: "url('" + (props.item.image || "") + "')" } }),
                 e("div", { key: "description", className: "card-description" }, [
                     e("h3", { key: "title" }, props.item.title)
                     //e("p", { key: "subtitle" }, props.item.subtitle)
-                    ])
-                ])
+                    ]),
+                props.debug.state.showDebugMenu ? e("input", {key: "debug", type: "checkbox", "data-id": props.item.id, checked: props.debug.state.debugItems[props.item.id] || false, onClick: debugClick}) : null
+                ]
+            )
         );
     };
 
     var CardCollection = function(props) {
         return e("div", { className: "card-collection"},
-            props.items.map(function(n) { return e(Card, { key: n.id, item: n }) } )
+            props.items.map(function(n) { return e(Card, { key: n.id, item: n, debug: props.debug }) } )
         );
     };
       
     var CardGroup = function(props) {
         return e("div", {}, [
             e("h2", {key: "header"}, props.group),
-            e(CardCollection, {key: "collection", items: props.items})
+            e(CardCollection, {key: "collection", items: props.items, debug: props.debug})
         ]);
     }
 
     var App = createReactClass({
         getInitialState: function() {
-            return { 
+            var debugItems = {};
+
+            for(var i = 0; i < window.pf.selection.items.length; i++) {
+                debugItems[window.pf.selection.items[i]] = true;
+            }
+
+            return {
                 tab: "all", sort: "date", tag: null, 
                 displayPrivate: false, clickCount: 0, 
                 showMenu: true,
                 selectedItem: null, 
                 loading: false, 
                 html: "",
-                showDebugMenu: true,
-                debugItems: {}
+                showDebugMenu: false,
+                debugItems: debugItems
             };
         },
         itemList: [],
@@ -382,6 +398,7 @@
             return this.setList(list);
         },
         setList: function(items) {
+            var self = this;
             var groups = {};
             var groupList = [];
 
@@ -425,15 +442,41 @@
             }
 
             return e("div", {key: 'list'}, groupList.map(function(g) {
-                return e(CardGroup, {key: g.group, group: g.group, items: g.items});
+                return e(CardGroup, {key: g.group, group: g.group, items: g.items, debug: self});
             }));
         },
         debugDisplayPrivateChange : function(event) {
             this.setState({displayPrivate: !!event.target.value});
         },
+        debugSaveLocalStorage: function(event) {
+            var items = [];
+            for(var i = 0; i < window.pf.items.length; i++) {
+                var key = window.pf.items[i].id;
+                if (this.state.debugItems[key]) {
+                    items.push(key);
+                }
+            }
+
+            window.localStorage.setItem('name', 'Top');
+            window.localStorage.setItem('items', items.join(","));
+            window.pf.selection.items = items;
+        },
+        debugClearLocalStorage: function(event) {
+            window.localStorage.clear();
+            window.location.reload
+        },        
         debugDownloadJson: function(event) {
             var filename = "db_selection.js";
-            var data = 'window.pf.selection = ' + window.JSON.stringify({name: 'z', items: ['a', 'b']}) + ";";
+            var items = [];
+
+            for (var i = 0; i < window.pf.items.length; i++) {
+                var key = window.pf.items[i].id;
+                if (this.state.debugItems[key]) {
+                    items.push(key);
+                }
+            }
+
+            var data = 'window.pf.selection = ' + window.JSON.stringify({name: 'Top', items: items}) + ";";
             var blob = new Blob([data], { type: 'text/json' });
             if (window.navigator.msSaveOrOpenBlob) {
                 window.navigator.msSaveBlob(blob, filename);
@@ -447,15 +490,21 @@
                 document.body.removeChild(elem);
             }
         },
+        debugDisplayItemChange: function(event) {
+            var id = event.target.dataset.id;
+            var items = this.state.debugItems;
+            items[id] = event.target.checked;
+            this.setState({debugItems: items});
+        },
         renderDebugMenu: function() {
             return e("div", {key: "debug-menu", className: "debug-menu"}, [
                 e("input", {key: "display-private", type: "checkbox", onChange: this.debugDisplayPrivateChange}),
                 e("label", {key: "display-private-label"}, "zobrazit skryté"),
                 e("div", {key: "buttons"}, [
-                    e("button", {key: "button-save", onClick: this.debugSaveLocalStorage}, "Uložit localStorage"),
+                    e("button", {key: "button-save", onClick: this.debugSaveLocalStorage}, "Uložit lokálně"),
+                    e("button", {key: "button-save", onClick: this.debugClearLocalStorage}, "Smazat lokální data"),
                     e("button", {key: "button-json", onClick: this.debugDownloadJson}, "Stáhnout JSON")
-                ]),
-                e("div", {key: "items"}, [])
+                ])
             ]);
         },
     });
