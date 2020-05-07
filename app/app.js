@@ -328,16 +328,16 @@
             result.sort(function(a, b) { return a.count - b.count; });
     
             var count = 5;
-
-            // var counts = [];
-            // for (i = 0; i < count; i++) {
-            //     counts.push(result[parseInt((count - i - 1) * result.length / count)].count);
-            // }
     
             for (i = 0; i < result.length; i++) {
                 result[i].size = (1 + i * count / result.length) | 0;
             }
 
+            // var counts = [];
+            // for (i = 0; i < count; i++) {
+            //     counts.push(result[parseInt((count - i - 1) * result.length / count)].count);
+            // }
+            
             // for(i = 0; i < result.length; i++) {
             //     c = 0;
             //     for(j = 0; j < counts.length; j++) {
