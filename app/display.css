@@ -158,3 +158,19 @@ div.card-container:hover, div.card-collection div.active {
     background-color: #255A74;
 }
 
+/* QR */
+
+.qr-fullscreen {
+    background-color: white;
+    color: black;
+    text-align: center;
+}
+
+.qr-link {
+    text-align: center;
+    font-size: 3vw;
+}
+
+.qr-image {
+    width: 40%;
+}

@@ -3,6 +3,7 @@
 
     pf.hash = '-';
     pf.appRef = React.createRef();
+    pf.debugQRref = React.createRef(),    
     pf.item = {};
 
     var navigateCallback = function() {
@@ -496,14 +497,40 @@
             items[id] = event.target.checked;
             this.setState({debugItems: items});
         },
+  
+        debugQR: function(event) {
+            var elem = pf.debugQRref.current;
+            var link = document.createElement("div");
+            var qr = document.createElement("canvas");
+
+            elem.innerHTML = "";
+            link.className = "qr-link";
+            qr.className = "qr-image"
+
+            link.innerText = window.location.href;
+
+            elem.appendChild(link);
+            elem.appendChild(qr);
+
+            //new QRCode(qr, window.location.href);
+
+            var qr = new QRious({
+                element: qr,
+                value: window.location.href
+            });
+
+            elem.requestFullscreen();
+        },
         renderDebugMenu: function() {
             return e("div", {key: "debug-menu", className: "debug-menu"}, [
                 e("input", {key: "display-private", type: "checkbox", onChange: this.debugDisplayPrivateChange}),
                 e("label", {key: "display-private-label"}, "zobrazit skryté"),
+                e("div", {key: "debug-qr", ref: pf.debugQRref, className: "qr-fullscreen"}, "QR"),
                 e("div", {key: "buttons"}, [
                     e("button", {key: "button-save", onClick: this.debugSaveLocalStorage}, "Uložit lokálně"),
-                    e("button", {key: "button-save", onClick: this.debugClearLocalStorage}, "Smazat lokální data"),
-                    e("button", {key: "button-json", onClick: this.debugDownloadJson}, "Stáhnout JSON")
+                    e("button", {key: "button-delete-local", onClick: this.debugClearLocalStorage}, "Smazat lokální data"),
+                    e("button", {key: "button-download-json", onClick: this.debugDownloadJson}, "Stáhnout JSON"),
+                    e("button", {key: "button-qr", onClick: this.debugQR}, "QR"),
                 ])
             ]);
         },
