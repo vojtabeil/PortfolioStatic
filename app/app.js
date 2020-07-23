@@ -133,10 +133,12 @@
 
             return {
                 tab: "all", sort: "date", tag: null, 
-                displayPrivate: false, clickCount: 0, 
+                displayPrivate: false, 
+                clickCount: 0, 
                 showMenu: true,
                 selectedItem: null, 
                 loading: false, 
+                tagFilter: '',
                 html: "",
                 showDebugMenu: false,
                 debugItems: debugItems
@@ -204,15 +206,32 @@
             array.push(e('ul', {key: 'tabs', className: 'tabs'}, tabs));
             array.push(e('ul', {key: 'sorts', className: 'sorts'}, sorts));
 
-            if (this.state.tab === 'tags' && this.state.tag !== null) {
-                array.push(e('h2', {key: 'selection', className: 'tag', onClick: this.clearTag}, [
-                    e('span', {key: 'pre-text', className: 'pre-text'}, 'Tag: '),
-                    e('span', {key: 'header', className: 'header'}, this.state.tag),
-                    e('span', {key: 'header', className: 'header'}, ' ×')
-                ]));
+            if (this.state.tab === 'tags') {
+                if (this.state.tag === null)
+                {
+                    array.push(e('div', {key: 'tag-filter', className: 'tag-filter'}, [
+                        e('span', {key: 'pre-text', className: 'pre-text'}, '⌕'),
+                        e('input', {key: 'tag-filter', value: this.state.tagFilter, onChange: this.changeTagFilter}),
+                        e('span', {key: 'cross', className: 'cross pre-text', onClick: this.clearTagFilter}, '×')
+                    ]));
+                }
+                else
+                {
+                    array.push(e('h2', {key: 'selection', className: 'tag', onClick: this.clearTag}, [
+                        e('span', {key: 'pre-text', className: 'pre-text'}, 'Tag '),
+                        e('span', {key: 'header', className: 'header'}, this.state.tag),
+                        e('span', {key: 'cross', className: 'cross'}, ' ×')
+                    ]));
+                }
             }
 
             return e('div', {key: 'selection', className: 'origin'}, array);
+        },
+        changeTagFilter: function(event) {
+            this.setState({tagFilter: event.target.value});
+        },
+        clearTagFilter: function() {
+            this.setState({tagFilter: ''});
         },
         toggleMenu: function() {
             this.setState({showMenu: !this.state.showMenu});
@@ -364,6 +383,12 @@
 
             if (this.state.tag === null) {
                 var tags = this.getAllTags(list);
+
+                if (this.state.tagFilter !== '' && this.state.tagFilter !== null) {
+                    var tagFilter = this.state.tagFilter.toUpperCase();
+                    tags = tags.filter(function(t) { return t.name.toUpperCase().indexOf(tagFilter) >= 0; } );
+                }
+
                 var clickTag = this.clickTag;
                 return e("ul", {className: "tag-list"}, tags.map(function(t) { 
                     return e("li", { key: t.name, className: "size" + t.size }, [

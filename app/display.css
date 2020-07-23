@@ -118,8 +118,27 @@ menu h2.tag {
     margin-bottom: 1em;
 }
 
+menu div.tag-filter span.pre-text {
+    font-size: 24pt;
+    margin: 0 12pt;
+}
+
 menu h2.tag:hover * {
     border-bottom: 4px solid #255A74;
+}
+
+menu div.tag-filter {
+    margin-top: 24pt;
+}
+
+menu div.tag-filter input {
+    width: 290px;
+    font-size: 18pt;
+    border: 0px;
+}
+
+span.cross {
+    cursor: pointer;
 }
 
 div.card-container { 
